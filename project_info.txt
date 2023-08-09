@@ -1,0 +1,84 @@
+1/ Create laravel project
+2/ bridge install :- composer require laravel/breeze:1.10
+
+3/ install Yezra datatable : composer require yajra/laravel-datatables:"^9.0"
+4/ go to config/app.php and putting this code into providers:-Yajra\DataTables	\DataTablesServiceProvider::class,
+5/ vendore publish :- php artisan vendor:publish --tag=datatables
+
+6/ install image intervention : composerrequire intervention/image
+7/ go to config/app.php an dputting this code :-
+	$provider 
+	Intervention\Image\ImageServiceProvider::class
+	$aliases
+	'Image' => Intervention\Image\Facades\Image::class
+8/ php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
+9/ install laravel shopping-cart: composer require bumbummen99/shoppingcart
+10/ vendor publish:-php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
+
+						Tutorial 2
+						-----------
+1/create multi auth
+2/create admin route and register route
+3/create IsAdmin middleware go to karnel.php file and register IsAdmin middleware
+4/ go to IsAdmin middleware and create condition
+						
+
+						Tutorial 3
+						-----------
+
+1/Mastering admin panel
+
+						Tutorial 4
+						-----------
+1/ Create login form	
+
+						Tutorial 5
+						-----------
+1/ create category table: php artisan make:migration create_categories_table 	
+2/ filled  name :- category_name,category_slug
+3/ create category model:- php artisan make:model Category
+3/ create category controller:- php artisan make:controller Admin/CategoryController
+				
+						Tutorial 7
+						-----------
+1/ create subcategory table: php artisan make:migration create_subcategories_table 	
+2/ filled  name :- category_id, subcategory_name,subcategory_slug
+3/ create subcategory model:- php artisan make:model Subcategory
+3/ create subcategory controller:- php artisan make:controller Admin/SubategoryController
+5/ subcategory create,edit,update,delete using model
+
+						Tutorial 8    YAJRA DATATABLE
+						-----------  -----------------
+1/ create childcategory table: php artisan make:migration create_childcategories_table 	
+2/ filled  name :- category_id, subcategory_id,childcategory_name,childcategory_slug
+3/ create childcategory model:- php artisan make:model Childcategory
+3/ create childcategory controller:- php artisan make:controller Admin/ChildCategoryController
+5/ childcategory create,edit,update,delete using model
+
+						Tutorial 10 
+					   ------------
+
+1/ create brand table
+2/ create brand controller
+3/ create brand model
+4/ multiple image upladed:
+ 	* npm install dropify  Or using cdn
+	then link jqurey cdn
+
+						 Tutorial 13  
+				  	    ------------
+1/ setting
+2/ create table :-php artisan make:migration create_seos_table
+2/ create controller :-php artisan make:controller Admin/SettingController
+2/ create Model :-php artisan make:Model Setting
+
+	 					 Tutorial 14  
+				  	    ------------
+1/ Dynamic smtp Setting 
+2/ create table :-php artisan make:migration create_smtp_table
+
+	 					 Tutorial 15  
+				  	    ------------
+1/ Dynamic Page creation 
+2/ create table :-php artisan make:migration create_pages_table
+2/ create controller:-  php artisan make:controller Admin/PageController
