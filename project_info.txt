@@ -82,3 +82,26 @@
 1/ Dynamic Page creation 
 2/ create table :-php artisan make:migration create_pages_table
 2/ create controller:-  php artisan make:controller Admin/PageController
+
+	 					 Tutorial 16  
+				  	    ------------
+1/ Products  //using yajra DaqtaaTable
+2/ create table :-php artisan make:migration create_products_table
+3/ create controller:-  php artisan make:controller Admin/ProductController
+4/ create model:-  php artisan make:Model Product
+5/ create warehouse table :-php artisan make:migration create_warehouses_table
+6/ create controller:-  php artisan make:controller Admin/WarehouseController
+7/ create Model:-  php artisan make:Model Warehouse
+
+						Tutorial 17  website settings
+				  	    ------------
+1/  create table :-php artisan make:migration create_settings_table
+
+						Tutorial 18  warehouse creation
+				  	    ------------
+
+			  Tutorial 19  Coupon Code Generate   without page load using yajra datatable
+			 ------------ ----------------------------------------------------------------
+1/ create table :-php artisan make:migration create_coupons_table
+2/ create controller:-  php artisan make:controller Admin/CouponController
+3/ create model:-  php artisan make:Model Coupon

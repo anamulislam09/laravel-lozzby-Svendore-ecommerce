@@ -4,9 +4,11 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildcategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,7 +58,7 @@ Route::middleware('is_admin')->group(function () {
         Route::post('/update', [ChildcategoryController::class, 'update'])->name('update.childcategory');
     });
 
-    // childcategory route
+    // brand route
     Route::group(['prefix' => 'brand'], function () {
         Route::get('/', [BrandController::class, 'index'])->name('brand.index');
         Route::get('/create', [BrandController::class, 'create'])->name('brand.create');
@@ -65,6 +67,27 @@ Route::middleware('is_admin')->group(function () {
         Route::post('/update', [BrandController::class, 'update'])->name('update.brand');
         Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
     });
+
+    // warehouse route
+    Route::group(['prefix' => 'warehouse'], function () {
+        Route::get('/', [WarehouseController::class, 'index'])->name('warehouse.index');
+        Route::get('/create', [WarehouseController::class, 'create'])->name('warehouse.create');
+        Route::post('/store', [WarehouseController::class, 'store'])->name('store.warehouse');
+        Route::get('/edit/{id}', [WarehouseController::class, 'edit']);
+        Route::post('/update', [WarehouseController::class, 'update'])->name('update.warehouse');
+        Route::get('/delete/{id}', [WarehouseController::class, 'destroy'])->name('warehouse.delete');
+    });
+
+    // coupon route
+    Route::group(['prefix' => 'coupon'], function () {
+        Route::get('/', [CouponController::class, 'index'])->name('coupon.index');
+        Route::get('/create', [CouponController::class, 'create'])->name('coupon.create');
+        Route::post('/store', [CouponController::class, 'store'])->name('store.coupon');
+        Route::get('/edit/{id}', [CouponController::class, 'edit']);
+        Route::post('/update', [CouponController::class, 'update'])->name('update.coupon');
+        Route::delete('/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
+    });
+
 
     // Settings route
     Route::group(['prefix' => 'setting'], function () {
@@ -78,6 +101,12 @@ Route::middleware('is_admin')->group(function () {
         Route::group(['prefix' => 'smtp'], function () {
             Route::get('/', [SettingController::class, 'smtp'])->name('smtp.setting');
             Route::post('/update/{id}', [SettingController::class, 'smtpUpdate'])->name('smtp.update');
+        });
+
+        // website setting
+        Route::group(['prefix' => 'website'], function () {
+            Route::get('/', [SettingController::class, 'websiteSetting'])->name('website.setting');
+            Route::post('/update/{id}', [SettingController::class, 'websiteSettingUpdate'])->name('website_setting.update');
         });
 
         // page creation setting
