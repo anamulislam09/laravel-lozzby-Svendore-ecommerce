@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Home</a></li>
-              <li class="breadcrumb-item active">Coupon List</li>
+              <li class="breadcrumb-item active">Pickup Point</li>
             </ol>
           </div>
         </div>
@@ -26,17 +26,15 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">All Coupon list here</h3>
-                <a href="{{route('coupon.create')}}" class="btn btn-sm btn-primary" style="float:right">Add
+                <h3 class="card-title">All Pickup Point list here</h3>
+                <a href="{{route('pickup_point.create')}}" class="btn btn-sm btn-primary" style="float:right">Add
                   New</a>
               </div>
               <div class="card-body">
                 <table id="dataTable" class="table table-bordered table-striped">
 
                   <tbody>
-                    <form action="" method="delete" id="deleted_form">
-                      @csrf @method('DELETE')
-                    </form>
+
                   </tbody>
                 </table>
               </div>
@@ -50,58 +48,48 @@
 
     {{-- Coupon edit model --}}
     <!-- Modal -->
-    <div class="modal fade" id="editCouponModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="editPickupModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Brand </h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit pickup_point </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="card-body">
-            <form action="{{ route('update.coupon') }}" method="POST" id="edit-form">
+            <form action="{{ route('update.pickup_point') }}" method="POST" id="edit-form">
               @csrf
-              <input type="hidden" name="id" id="e_coupon_id">
+              <input type="hidden" name="id" id="e_pickup_id">
               <div class="mb-3 mt-3">
-                <label for="coupon_code" class="form-label">Coupon Code :</label>
-                <input type="text" class="form-control" value="{{ old('coupon_code') }}" id="e_coupon_code" name="coupon_code" required>
+                <label for="pickup_point_name" class="form-label">Pickup point name :</label>
+                <input type="text" class="form-control" value="{{ old('pickup_point_name') }}" id="e_pickup_point_name" name="pickup_point_name" required>
               </div>
-              @error('coupon_code')
+              @error('pickup_point_name')
                 <div class="alert alert-danger">{{ $message }}</div>
               @enderror
                           
               <div class="mb-3 mt-3">
-                <label for="valid_date" class="form-label">valid_date :</label>
-                <input type="date" class="form-control" name="valid_date" id="e_valid_date">
+                <label for="pickup_point_address" class="form-label">pickup_point Address :</label>
+                <input type="text" class="form-control" name="pickup_point_address" id="e_pickup_point_address" value="{{ old('pickup_point_address') }}" required>
               </div>
-          
+    
               <div class="mb-3 mt-3">
-                <label for="type" class="form-label">Coupon type :</label>
-                  <select name="type" id="e_type" class="form-control">
-                    <option value="" selected disabled>Selece Once</option>
-                    <option value="1">Fixed</option>
-                  <option value="2">Percentage</option>
-                  </select>
+                <label for="pickup_point_phone" class="form-label"> pickup_point Phone number :</label>
+                <input type="text" class="form-control" value="{{ old('pickup_point_phone') }}" id="e_pickup_point_phone" name="pickup_point_phone" required>
               </div>
-          
-              <div class="mb-3 mt-3">
-                <label for="coupon_amount" class="form-label"> Coupon amount :</label>
-                <input type="text" class="form-control" value="{{ old('coupon_amount') }}" name="coupon_amount" id="e_coupon_amount">
-              </div>
-              @error('coupon_amount')
+              @error('pickup_point_phone')
                 <div class="alert alert-danger">{{ $message }}</div>
               @enderror
           
               <div class="mb-3 mt-3">
-                <label for="type" class="form-label">Coupon status :</label>
-                  <select name="status" id="e_status" class="form-control">
-                    <option value="" selected disabled>Selece Once</option>
-                    <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                  </select>
+                <label for="pickup_point_phone_two" class="form-label">Another phone :</label>
+                <input type="text" class="form-control" value="{{ old('pickup_point_phone_two') }}" id="e_pickup_point_phone_two" name="pickup_point_phone_two">
               </div>
+              @error('pickup_point_phone_two')
+                <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
           
           </div>
           
@@ -128,7 +116,7 @@
           serverSide: true,
           processing: true,
           ajax: {
-            url: "{{ route('coupon.index') }}",
+            url: "{{ route('pickup_point.index') }}",
           },
           columns: [{
               data: "DT_RowIndex",
@@ -138,28 +126,23 @@
               orderable: false
             },
             {
-              data: "coupon_code",
-              title: "Coupon Code ",
+              data: "pickup_point_name",
+              title: "Pickup_point_name",
               searchable: true
             },
             {
-              data: "valid_date",
-              title: "Valid date",
+              data: "pickup_point_address",
+              title: "Pickup_point_address",
               searchable: true
             },
             {
-              data: "type",
-              title: "Coupon type",
+              data: "pickup_point_phone",
+              title: "Pickup_point_phone",
               searchable: true
             },
             {
-              data: "coupon_amount",
-              title: "Coupon Amount",
-              searchable: true
-            },
-            {
-              data: "status",
-              title: "Coupon Status",
+              data: "pickup_point_phone_two",
+              title: "Pickup_point_phone_two",
               searchable: true
             },
             {
@@ -183,15 +166,14 @@
 
  // update date using ajax
       $('body').on('click', '#edit', function() {
-        let coupon_id = $(this).data('id');
-        // console.log(childcat_id);
-        $.get("/coupon/edit/" + coupon_id, function(data) {
-          $('#e_coupon_code').val(data.coupon_code);
-          $('#e_valid_date').val(data.valid_date);
-          $('#e_type').val(data.type);
-          $('#e_coupon_amount').val(data.coupon_amount);
-          $('#e_status').val(data.status);
-          $('#e_coupon_id').val(data.id);
+       var pickup_id = $(this).data('id');
+        // console.log(pickup_id);
+        $.get("pickupPoint/edit/" + pickup_id, function(data) {
+          $('#e_pickup_point_name').val(data.pickup_point_name);
+          $('#e_pickup_point_address').val(data.pickup_point_address);
+          $('#e_pickup_point_phone').val(data.pickup_point_phone);
+          $('#e_pickup_point_phone_two').val(data.pickup_point_phone_two);
+          $('#e_pickup_id').val(data.id);
 
         })
       })

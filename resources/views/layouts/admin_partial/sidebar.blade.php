@@ -102,6 +102,30 @@
                 </li>
                 {{-- Offers ends here --}}
 
+                               {{-- offers start here --}}
+                               <li class="nav-item">
+                                <a href="#" class="nav-link pl-2">
+                                  <i class="nav-icon fa fa-wrench" aria-hidden="true"></i>
+                                  <p>
+                                    Pickup point
+                                    <i class="right fas fa-angle-left"></i>
+                                  </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                  <li class="nav-item">
+                                    <a href="{{ route('pickup_point.index') }}" class="nav-link">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>Pickup-Point</p>
+                                    </a>
+                                  </li>
+
+                                 
+                      
+                                </ul>
+                              </li>
+                              {{-- Offers ends here --}}
+
+
         {{-- Settings start here --}}
         <li class="nav-item">
           <a href="#" class="nav-link pl-2">

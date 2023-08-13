@@ -105,3 +105,10 @@
 1/ create table :-php artisan make:migration create_coupons_table
 2/ create controller:-  php artisan make:controller Admin/CouponController
 3/ create model:-  php artisan make:Model Coupon
+
+
+				   Tutorial 22     Pickup Point CRUD Yajra Datatable With Ajax
+				-----------------------------------------------------------------
+1/ create table :-php artisan make:migration create_pickup_points_table
+2/ create controller:-  php artisan make:controller Admin/pickupController
+3/ create model:-  php artisan make:Model pickup_point

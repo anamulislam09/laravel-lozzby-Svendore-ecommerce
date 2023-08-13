@@ -62,8 +62,7 @@
             <input type="hidden" name="id" id="e_brand_id">
             <div class="mb-3 mt-3">
               <label for="brand_name" class="form-label">Brand Name:</label>
-              <input type="text" class="form-control" value="{{ old('brand_name') }}" name="brand_name"
-                id="e_brand_name" placeholder="Enter childcategory">
+              <input type="text" class="form-control" value="{{ old('brand_name') }}" name="brand_name" id="e_brand_name">
             </div>
             @error('brand_name')
               <div class="alert alert-danger">{{ $message }}</div>

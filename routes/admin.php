@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildcategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\pickupController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\WarehouseController;
@@ -118,5 +119,17 @@ Route::middleware('is_admin')->group(function () {
             Route::post('/update/{id}', [PageController::class, 'update'])->name('update.page');
             Route::get('/delete/{id}', [PageController::class, 'destroy'])->name('page.delete');
         });
+
+        // Pickup-point routes
+        Route::group(['prefix' => 'pickupPoint'], function () {
+            Route::get('/', [pickupController::class, 'index'])->name('pickup_point.index');
+            Route::get('/create', [pickupController::class, 'create'])->name('pickup_point.create');
+            Route::post('/store', [pickupController::class, 'store'])->name('store.pickup_point');
+            Route::get('/edit/{id}', [pickupController::class, 'edit']);
+            Route::post('/update', [pickupController::class, 'update'])->name('update.pickup_point');
+            Route::get('/delete/{id}', [pickupController::class, 'destroy'])->name('pickup_point.delete');
+        });
+
+
     });
 });
