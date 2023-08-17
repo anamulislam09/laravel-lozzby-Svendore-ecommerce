@@ -20,6 +20,8 @@ class Product extends Model
         'product_code',
         'product_unit',
         'product_tags',
+        'product_color',
+        'product_size',
         'product_video',
         'purchase_price',
         'selling_price',
@@ -28,12 +30,28 @@ class Product extends Model
         'warehouse',
         'product_description',
         'product_thumbnail',
-        'product_images',
+        'images',
         'featured',
         'today_deal',
         'status',
-        'flash_deal_id',
         'cash_on_delivery',
         'admin_id',
+        'pickup_point_id',
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+    public function subcategory(){
+        return $this->belongsTo(Subcategory::class, 'subcategory_id');
+    }
+    public function childcategory(){
+        return $this->belongsTo(Childcategory::class, 'childcategory_id');
+    }
+    public function brand(){
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+    public function pickuppoint(){
+        return $this->belongsTo(pickup_point::class, 'pickup_point_id');
+    }
 }

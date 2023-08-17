@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('product_code');
             $table->string('product_unit')->nullable();
             $table->string('product_tags')->nullable();
+            $table->string('product_color')->nullable();
+            $table->string('product_size')->nullable();
             $table->string('product_video')->nullable();
             $table->string('purchase_price')->nullable();
             $table->string('selling_price')->nullable();
@@ -32,13 +34,13 @@ return new class extends Migration
             $table->integer('warehouse')->nullable();
             $table->string('product_description')->nullable();
             $table->string('product_thumbnail')->nullable();
-            $table->string('product_images')->nullable();
+            $table->string('images')->nullable();
             $table->integer('featured')->nullable();
             $table->integer('today_deal')->nullable();
             $table->integer('status')->nullable();
-            $table->integer('flash_deal_id')->nullable();
             $table->integer('cash_on_delivery')->nullable();
             $table->integer('admin_id')->nullable();
+            $table->integer('pickup_point_id')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

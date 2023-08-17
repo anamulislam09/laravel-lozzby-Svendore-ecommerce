@@ -112,3 +112,7 @@
 1/ create table :-php artisan make:migration create_pickup_points_table
 2/ create controller:-  php artisan make:controller Admin/pickupController
 3/ create model:-  php artisan make:Model pickup_point
+
+				   Tutorial 22     product page designing
+				------------------------------------------
+1/ 

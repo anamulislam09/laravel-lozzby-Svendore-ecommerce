@@ -65,6 +65,32 @@
         </li>
         {{-- servises menu ends here --}}
 
+        {{-- Products menu start here --}}
+        <li class="nav-item">
+          <a href="#" class="nav-link pl-2">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              Products
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ route('product.create') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>New Product</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('product.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>All Product</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        {{-- Products menu ends here --}}
+
         {{-- waerhouse menu start here --}}
         <li class="nav-item">
           <a href="{{ route('warehouse.index') }}" class="nav-link">
@@ -74,56 +100,56 @@
         </li>
         {{-- waerhouse ends here --}}
 
-                {{-- offers start here --}}
-                <li class="nav-item">
-                  <a href="#" class="nav-link pl-2">
-                    <i class="nav-icon fa fa-wrench" aria-hidden="true"></i>
-                    <p>
-                      Offers
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="{{ route('coupon.index') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Coupon</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="{{ route('website.setting') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>E-Campaign</p>
-                      </a>
-                    </li>
-                   
-        
-                  </ul>
-                </li>
-                {{-- Offers ends here --}}
+        {{-- offers start here --}}
+        <li class="nav-item">
+          <a href="#" class="nav-link pl-2">
+            <i class="nav-icon fa fa-wrench" aria-hidden="true"></i>
+            <p>
+              Offers
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ route('coupon.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Coupon</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('website.setting') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>E-Campaign</p>
+              </a>
+            </li>
 
-                               {{-- offers start here --}}
-                               <li class="nav-item">
-                                <a href="#" class="nav-link pl-2">
-                                  <i class="nav-icon fa fa-wrench" aria-hidden="true"></i>
-                                  <p>
-                                    Pickup point
-                                    <i class="right fas fa-angle-left"></i>
-                                  </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                  <li class="nav-item">
-                                    <a href="{{ route('pickup_point.index') }}" class="nav-link">
-                                      <i class="far fa-circle nav-icon"></i>
-                                      <p>Pickup-Point</p>
-                                    </a>
-                                  </li>
 
-                                 
-                      
-                                </ul>
-                              </li>
-                              {{-- Offers ends here --}}
+          </ul>
+        </li>
+        {{-- Offers ends here --}}
+
+        {{-- offers start here --}}
+        <li class="nav-item">
+          <a href="#" class="nav-link pl-2">
+            <i class="nav-icon fa fa-wrench" aria-hidden="true"></i>
+            <p>
+              Pickup point
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ route('pickup_point.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pickup-Point</p>
+              </a>
+            </li>
+
+
+
+          </ul>
+        </li>
+        {{-- Offers ends here --}}
 
 
         {{-- Settings start here --}}

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ChildcategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\pickupController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\WarehouseController;
@@ -67,6 +68,33 @@ Route::middleware('is_admin')->group(function () {
         Route::get('/edit/{id}', [BrandController::class, 'edit']);
         Route::post('/update', [BrandController::class, 'update'])->name('update.brand');
         Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
+    });
+
+    // Products route 
+    Route::group(['prefix' => 'product'], function () {
+        Route::get('/', [ProductController::class, 'index'])->name('product.index');
+        Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+        Route::post('/store', [ProductController::class, 'store'])->name('store.product');
+        
+        Route::post('/subcategory', [ProductController::class, 'subcategory']); // get subcategory using ajex 
+        Route::post('/childcategory', [ProductController::class, 'childcategory']); // get subcategory using ajex 
+
+        // featured reoute start here 
+        Route::get('/not-featured/{id}', [ProductController::class, 'notFeatured']); // Not-featured route
+        Route::get('/active-featured/{id}', [ProductController::class, 'activeFeatured']); // active-featured route
+       // featured reoute ends here 
+        // TodayDeal reoute start here 
+        Route::get('/active_today_deal/{id}', [ProductController::class, 'activeTodayDeal']); // active-featured route
+        Route::get('/not_today_dea/{id}', [ProductController::class, 'notTodayDeal']); // Not-featured route
+        // TodayDeal reoute ends here 
+        
+        // TodayDeal reoute ends here 
+        Route::get('/active_status/{id}', [ProductController::class, 'activeStatus']); // Active route
+        Route::get('/no_tactive_status/{id}', [ProductController::class, 'notActiveStatus']); //deActive route
+        // featured reoute ends here 
+        Route::get('/edit/{id}', [ProductController::class, 'edit']);
+        Route::post('/update', [ProductController::class, 'update'])->name('update.product');
+        Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
     });
 
     // warehouse route
