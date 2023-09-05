@@ -64,20 +64,20 @@
 
           <div class="mb-3 mt-3">
             <label for="address" class="form-label"> Website Address :</label>
-            <textarea name="" id="" class="form-control" cols="" rows="" required></textarea>
+            <textarea name="" id="" class="form-control" cols="" rows="" ></textarea>
           </div>
 
           <strong class="text-center"> ----Logo & Favicon---- </strong>
 
           <div class="mb-3 mt-3">
             <label for="logo" class="form-label"> Sight Logo :</label>
-            <input type="file" class="form-control" name="logo" required>
+            <input type="file" class="form-control" name="logo" >
             <input type="hidden" class="form-control" value="{{ $data->logo }}" name="old_logo" required>
           </div>
 
           <div class="mb-3 mt-3">
             <label for="favicon" class="form-label"> Sight favicon :</label>
-            <input type="file" class="form-control" name="favicon" required>
+            <input type="file" class="form-control" name="favicon" >
             <input type="hidden" class="form-control" value="{{ $data->favicon }}" name="old_favicon" required>
           </div>
 

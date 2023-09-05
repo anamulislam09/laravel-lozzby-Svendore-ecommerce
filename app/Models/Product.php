@@ -34,6 +34,7 @@ class Product extends Model
         'featured',
         'today_deal',
         'status',
+        'product_slider',
         'cash_on_delivery',
         'admin_id',
         'pickup_point_id',

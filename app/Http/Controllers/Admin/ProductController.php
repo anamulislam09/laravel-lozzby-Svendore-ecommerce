@@ -44,7 +44,7 @@ class ProductController extends Controller
                 $query->where('products.status',1);
             }elseif($request->status==0){
                 $query->where('products.status',0);
-            };
+            }
             $product = $query->select('products.*', 'categories.category_name', 'subcategories.subcategory_name', 'brands.brand_name')->get();
             return DataTables::of($product)
                 ->addIndexColumn()
@@ -74,7 +74,7 @@ class ProductController extends Controller
                 })         //status column ends here
                 ->addColumn('action', function ($row) {
                     $actionbtn = ' 
-                    <a href="" class="btn btn-sm btn-info" ><i class="fas fa-edit"></i></a> 
+                    <a href="' . route('product.edit', [$row->id]) . '" class="btn btn-sm btn-info" ><i class="fas fa-edit"></i></a> 
                     <a href="" class="btn btn-sm btn-primary" ><i class="fas fa-eye"></i></a> 
                      <a href="' . route('product.delete', [$row->id]) . '"  class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>';
                     return $actionbtn;
@@ -219,6 +219,7 @@ class ProductController extends Controller
             'product_thumbnail' => $thumbnail_url,
             'images' => json_encode($images),
             'featured' => $request->featured,
+            'product_slider' => $request->product_slider,
             'status' => $request->status,
             'today_deal' => $request->today_deal,
             'cash_on_delivery' => $request->cash_on_delivery,
@@ -231,6 +232,19 @@ class ProductController extends Controller
         $notification = array('message' => 'Product added successfully.', 'alert_type' => 'success');
         return redirect()->route('product.index')->with($notification);
         // return redirect()->route('product.index')->with($notification);
+    }
+
+
+    // destroy method 
+    public function edit($id){
+
+        $cats = Category::all();
+        $brands = Brand::all();
+        $pic_poines = pickup_point::all();
+        $warehouses = Warehouse::all();
+
+        $product = Product::findOrFail($id);
+        return view('admin.product.edit', compact('product','cats','brands','pic_poines','warehouses'));
     }
 
 

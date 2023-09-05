@@ -32,12 +32,13 @@ return new class extends Migration
             $table->string('descount_price')->nullable();
             $table->string('stock_quantity')->nullable();
             $table->integer('warehouse')->nullable();
-            $table->string('product_description')->nullable();
+            $table->text('product_description')->nullable();
             $table->string('product_thumbnail')->nullable();
             $table->string('images')->nullable();
             $table->integer('featured')->nullable();
             $table->integer('today_deal')->nullable();
             $table->integer('status')->nullable();
+            $table->integer('product_slider')->nullable();
             $table->integer('cash_on_delivery')->nullable();
             $table->integer('admin_id')->nullable();
             $table->integer('pickup_point_id')->nullable();

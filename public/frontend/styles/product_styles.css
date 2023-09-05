@@ -2114,3 +2114,9 @@ select option
 {
 	margin-right: 0px;
 }
+
+
+/* custome style start here */
+span.fa.fa-star.checked {
+    color: #d8bc03;
+}

@@ -92,7 +92,7 @@ Route::middleware('is_admin')->group(function () {
         Route::get('/active_status/{id}', [ProductController::class, 'activeStatus']); // Active route
         Route::get('/no_tactive_status/{id}', [ProductController::class, 'notActiveStatus']); //deActive route
         // featured reoute ends here 
-        Route::get('/edit/{id}', [ProductController::class, 'edit']);
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');;
         Route::post('/update', [ProductController::class, 'update'])->name('update.product');
         Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
     });

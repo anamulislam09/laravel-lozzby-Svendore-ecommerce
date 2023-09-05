@@ -99,7 +99,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1"> ChildCategory</label>
                         <select name="childcategory_id" id="childcategory"
-                          class="form-control @error('childcategory_id') is-invalid @enderror"required>
+                          class="form-control @error('childcategory_id') is-invalid @enderror">
                           <option value="" selected disabled>Select Once</option>
                           {{-- @foreach ($childcats as $childcat)
                             <option value="{{ $childcat->id }}">{{ $childcat->childcategory_name }}</option>
@@ -210,7 +210,7 @@
 
                   <div class="form-group">
                     <label for="exampleInputPassword1">Video embade code</label>
-                    <textarea name="product_video" class="form-control" placeholder="Enter video link"></textarea>
+                    <input type="link" name="product_video" class="form-control" placeholder="Enter video link" value="{{old('product_video')}}">
                   </div>
 
                   {{-- <div class="form-check">
@@ -263,6 +263,12 @@
                       data-on-color="success">
                   </div>
 
+                  <div class="card p-4">
+                    <h6> Slider Product </h6>
+                    <input type="checkbox" name="product_slider" value="1" data-bootstrap-switch data-off-color="danger"
+                      data-on-color="success">
+                  </div>
+                  
                   <div class="card p-4">
                     <h6> Status</h6>
                     <input type="checkbox" name="status" value="1" checked data-bootstrap-switch data-off-color="danger"

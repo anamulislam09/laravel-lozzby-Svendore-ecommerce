@@ -25,7 +25,6 @@
         <div class="card-header">
             <h3 class="card-title">Add SubCategory</h3>
             <a href="{{ route('subcategory.index') }}" class="btn btn-sm btn-primary" style="float:right">SubCategory list</a>
-
         </div>
         <!-- /.card-header -->
         <div class="card-body">

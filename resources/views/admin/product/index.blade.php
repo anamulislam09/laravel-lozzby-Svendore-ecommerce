@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-group col-2">
                   <label for="">Status</label>
-                  <select class="form-control submitable" onchange="filter(event,'status')" name="status" id="status">
+                  <select class="form-control submitable" name="status" id="status">
                     <option value="1" selected >All</option>
                     <option value="1">Active</option>
                     <option value="0">Inactive</option>
@@ -206,10 +206,6 @@
         ],
       });
     })
-
-    // function filter(e,field){
-    //   console.log(e,field)
-    // }
     // {{-- featured ajax stert here --}}
     //   {{-- active featured --}}
 
