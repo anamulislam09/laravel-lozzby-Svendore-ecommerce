@@ -69,7 +69,8 @@
                           @isset($singleProduct->product_size)
                             <div class="col-6">
                               <label for="">Size:</label>
-                              <select name="size" class="form-control form-control-sm" style="min-width:120px;" id="">
+                              <select name="size" class="form-control form-control-sm" style="min-width:120px;"
+                                id="">
                                 <option value="" selected disabled>Select Size</option>
                                 @foreach ($size as $row)
                                   <option value="">{{ $row }}</option>
@@ -80,10 +81,11 @@
                           @isset($singleProduct->product_color)
                             <div class="col-6">
                               <label for="">Color:</label>
-                              <select name="color" class="form-control form-control-sm" style="min-width:120px;" id="">
-                                <option value="" selected disabled >Select color</option>
+                              <select name="color" class="form-control form-control-sm" style="min-width:120px;"
+                                id="">
+                                <option value="" selected disabled>Select color</option>
                                 @foreach ($color as $row)
-                                  <option value="">{{$row}}</option>
+                                  <option value="">{{ $row }}</option>
                                 @endforeach
                               </select>
                             </div>
@@ -189,7 +191,7 @@
         </div>
         <div class="card-body row">
           <div class="col-3">
-            <p>Average & Reviews of {{ $singleProduct->product_name }}.</p>
+            <p>Average Reviews of {{ $singleProduct->product_name }}.</p>
             <div class="rating_r rating_r_4 product_rating">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
@@ -199,34 +201,134 @@
             </div>
           </div>
           <div class="col-3">
-            <p>Your review of this product</p>
+            <p>Total review of this product</p>
+            <div class="rating_r rating_r_4 product_rating">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="pl-2">total 00</span>
+            </div>
             <div class="rating_r rating_r_4 product_rating">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star"></span>
+              <span class="pl-2">total 00</span>
+            </div>
+            <div class="rating_r rating_r_4 product_rating">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star "></span>
+              <span class="fa fa-star"></span>
+              <span class="pl-2">total 00</span>
+            </div>
+            <div class="rating_r rating_r_4 product_rating">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star "></span>
+              <span class="fa fa-star "></span>
+              <span class="fa fa-star"></span>
+              <span class="pl-2">total 00</span>
+            </div>
+            <div class="rating_r rating_r_4 product_rating">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star "></span>
+              <span class="fa fa-star "></span>
+              <span class="fa fa-star "></span>
+              <span class="fa fa-star"></span>
+              <span class="pl-2">total 00</span>
             </div>
 
           </div>
           <div class="col-6">
-          <div class="form-group">
-            <label for=""> Write your review</label>
-            <textarea class="form-control" name="" id="" ></textarea>
+            <form action="{{ route('store.review') }}" method="POST">
+              @csrf
+              <input type="hidden" name="product_id" value="{{ $singleProduct->id }}">
+              <div class="form-group">
+                <label for=""> Write your review</label>
+                <textarea class="form-control" name="review" id=""></textarea>
+              </div>
+              <div class="form-group">
+                <label for="">Write your review</label>
+                <select name="rating" class="custom-select" id="" style="min-width:170px;">
+                  <option value="" selected disabled>Select your review</option>
+                  <option value="1">1 star</option>
+                  <option value="2">2 star</option>
+                  <option value="3">3 star</option>
+                  <option value="4">4 star</option>
+                  <option value="5">5 star</option>
+                </select>
+              </div>
+              @if (Auth::check())
+                <button type="submit" class="btn btn-sm btn-info"><span class="fa fa-star">submit
+                    review</span></button>
+              @else
+                <p>please login first to your account for submit a review</p>
+              @endif
+            </form>
           </div>
-          <div class="form-group">
-            <label for="">Write your review</label>
-            <select name="review" class="form-control" id="">
-              <option value="" selected disabled>Select your review</option>
-              <option value="1">1 star</option>
-              <option value="2">2 star</option>
-              <option value="3">3 star</option>
-              <option value="4">4 star</option>
-              <option value="5">5 star</option>
-            </select>
-          </div>
-          
-          </div>
+
+        </div>
+        {{-- All reviews of this product --}}
+        <strong class="pl-4">All review of {{ $singleProduct->product_name }}</strong><br>
+        <div class="row">
+          @foreach ($review as $row)
+            <div class="card col-lg-12 col-md-12 col-sm-12 ml-3">
+              <div class="card-header">
+                {{ $row->user->name }} ({{ date('d F , Y'), strtotime($row->review_date) }})
+              </div>
+              <div class="card-body">
+                {{ $row->review }}
+                @if ($row->rating == 5)
+                  <div class="rating_r rating_r_4 product_rating">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    {{-- <span class="pl-2">total 00</span> --}}
+                  </div>
+                @elseif ($row->rating == 4)
+                  <div class="rating_r rating_r_4 product_rating">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                  </div>
+                @elseif ($row->rating == 3)
+                  <div class="rating_r rating_r_4 product_rating">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+
+                  </div>
+                @elseif ($row->rating == 2)
+                  <div class="rating_r rating_r_4 product_rating">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                  </div>
+                @elseif ($row->rating == 1)
+                  <div class="rating_r rating_r_4 product_rating">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                  </div>
+                @endif
+              </div>
+            </div>
+          @endforeach
         </div>
       </div>
     </div>
@@ -250,35 +352,35 @@
           <div class="viewed_slider_container">
             <div class="owl-carousel owl-theme viewed_slider">
               @foreach ($reletedProduct as $item)
-                
-              <div class="owl-item">
-                <div
-                  class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                  <div class="viewed_image">
-                    <img src="{{ asset($item->product_thumbnail) }}" alt="{{ $item->product_name }}" />
-                  </div>
-                  <div class="viewed_content text-center">
-                    <div class="viewed_price">
-                      @if ($item->descount_price == null)
-                      <div class="viewed_price">{{ $setting->currency }}{{ $item->selling_price }}</div>
-                    @else
-                      <div class="viewed_price"><del class="pr-3" style="font-size: 12px; color:#838080;">{{ $setting->currency }}{{ $item->selling_price }}</del>{{ $setting->currency }}{{ $item->descount_price }}
+                <div class="owl-item">
+                  <div
+                    class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="viewed_image">
+                      <img src="{{ asset($item->product_thumbnail) }}" alt="{{ $item->product_name }}" />
+                    </div>
+                    <div class="viewed_content text-center">
+                      <div class="viewed_price">
+                        @if ($item->descount_price == null)
+                          <div class="viewed_price">{{ $setting->currency }}{{ $item->selling_price }}</div>
+                        @else
+                          <div class="viewed_price"><del class="pr-3"
+                              style="font-size: 12px; color:#838080;">{{ $setting->currency }}{{ $item->selling_price }}</del>{{ $setting->currency }}{{ $item->descount_price }}
+                          </div>
+                        @endif
                       </div>
-                    @endif
+                      <div class="viewed_name">
+                        <a
+                          href="{{ route('product.product_details', $item->product_slug) }}">{{ substr($item->product_name, 0, 50) }}</a>
+                      </div>
                     </div>
-                    <div class="viewed_name">
-                      <a href="{{route('product.product_details', $item->product_slug)}}">{{substr($item->product_name,0 , 50)}}</a>
-                    </div>
+                    <ul class="item_marks">
+                      <li class="item_mark item_discount">
+                        New
+                      </li>
+
+                    </ul>
                   </div>
-                  <ul class="item_marks">
-                    <li class="item_mark item_discount">
-                      New
-                    </li>
-
-                  </ul>
                 </div>
-              </div>
-
               @endforeach
             </div>
           </div>

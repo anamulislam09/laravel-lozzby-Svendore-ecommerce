@@ -24,6 +24,10 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/responsive.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/product_styles.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/product_responsive.css') }}">
+ 
+    <!-- toaste -->
+    <link rel="stylesheet" href="{{asset('backend/plugins/toastr/toastr.css')}}">
+
   {{-- <script nonce="56ba8d5e-ddb3-4602-b0f2-4db2698c22ae">
     (function(w, d) {
       ! function(j, k, l, m) {
@@ -140,9 +144,7 @@
                     </ul>
                   </li>
                 </ul>
-
                     @else
-                   
                     <ul class="standard_dropdown top_bar_dropdown">
                       <li>
                         <a href="#">{{Auth::user()->name}}<i class="fas fa-chevron-down"></i></a>
@@ -153,13 +155,9 @@
                           <li><a href="{{route('customer.logout')}}">Logout</a></li>
                         </ul>
                       </li>
-                     
                     </ul>
                   @endguest
-                  
-
-                  
-
+ 
                 </div>
               </div>
             </div>
@@ -396,8 +394,31 @@
   <script src="{{ asset('frontend/plugins/easing/easing.js') }}"></script>
   <script src="{{ asset('frontend/js/custom.js') }}"></script>
   <script src="{{ asset('frontend/js/product_custom.js') }}"></script>
+   <!-- toaste -->
+<script src="{{asset('backend/plugins/toastr/toastr.min.js')}}"></script>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+
+  <script>
+    @if (Session::has('message'))
+    var type = "{{Session::get('alert-type','info')}}"
+      switch (type) {
+        case 'info':
+          toastr.info("{{Session::get('message')}}");
+          break;
+        case 'success':
+          toastr.success("{{Session::get('message')}}");
+          break;
+        case 'warning':
+          toastr.warning("{{Session::get('message')}}");
+          break;
+        case 'error':
+          toastr.error("{{Session::get('message')}}");
+          break;
+      }
+    @endif
+  </script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
 
