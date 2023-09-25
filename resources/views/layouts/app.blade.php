@@ -140,7 +140,7 @@
                     <a href="#"><i class="fas fa-user"></i>User</a>
                     <ul>
                       <li><a href="#" style="color: #4b4b49" data-toggle="modal" data-target="#login">login<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="#">Registration</a></li>
+                      <li><a href="{{route('register')}}">Registration</a></li>
                     </ul>
                   </li>
                 </ul>

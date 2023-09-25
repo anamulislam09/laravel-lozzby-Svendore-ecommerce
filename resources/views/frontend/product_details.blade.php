@@ -4,6 +4,28 @@
   {{-- main navbar start here  --}}
   @include('layouts.frontend_partial.main_nav')
 
+  @php
+    $rating5 = App\Models\Review::where('product_id', $singleProduct->id)
+        ->where('rating', 5)
+        ->count();
+    $rating4 = App\Models\Review::where('product_id', $singleProduct->id)
+        ->where('rating', 4)
+        ->count();
+    $rating3 = App\Models\Review::where('product_id', $singleProduct->id)
+        ->where('rating', 3)
+        ->count();
+    $rating2 = App\Models\Review::where('product_id', $singleProduct->id)
+        ->where('rating', 2)
+        ->count();
+    $rating1 = App\Models\Review::where('product_id', $singleProduct->id)
+        ->where('rating', 1)
+        ->count();
+    
+    // average rating
+    $sum_rating = App\Models\Review::where('product_id', $singleProduct->id)->sum('rating');
+    $count_rating = App\Models\Review::where('product_id', $singleProduct->id)->count('rating');
+  @endphp
+
   <div class="single_product">
     <div class="container">
       <div class="row">
@@ -45,11 +67,51 @@
                 <div class="product_category"><span class="text-info">Unit: </span>{{ $singleProduct->product_unit }}
                 </div>
                 <div class="rating_r rating_r_4 product_rating">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
+                  @if ($sum_rating == null)
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span> (0)</span>
+                  @elseif ($sum_rating != null)
+                    @if ($sum_rating / $count_rating == 5 || $sum_rating / $count_rating >= 4.5)
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <a href="#review" class="pl-2">{{ $sum_rating / $count_rating }} Ratings</a>
+                    @elseif ($sum_rating / $count_rating < 4.5 && $sum_rating / $count_rating >= 3.5)
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star"></span>
+                      <a href="#review" class="pl-2">{{ $sum_rating / $count_rating }} Ratings</a>
+                    @elseif ($sum_rating / $count_rating < 3.5 && $sum_rating / $count_rating >= 2.5)
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star "></span>
+                      <span class="fa fa-star"></span>
+                      <a href="#review" class="pl-2">{{ floatval($sum_rating / $count_rating )}} Ratings</a>
+                    @elseif ($sum_rating / $count_rating < 2.5 && $sum_rating / $count_rating >= 1.5)
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star "></span>
+                      <span class="fa fa-star "></span>
+                      <span class="fa fa-star"></span>
+                      <a href="#review" class="pl-2">{{ $sum_rating / $count_rating }} Ratings</a>
+                    @else
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star "></span>
+                      <span class="fa fa-star "></span>
+                      <span class="fa fa-star "></span>
+                      <span class="fa fa-star"></span>
+                      <a href="#review" class="pl-2">{{ $sum_rating / $count_rating }} Ratings</a>
+                    @endif
+                  @endif
                 </div>
                 {{-- <div class="product_text"> 
                   <p>
@@ -175,7 +237,8 @@
 
       <div class="card mt-5">
         <div class="card-header">
-          <div class="product_name pl-3" style="font-size: 20px;">Product details of {{ $singleProduct->product_name }}.
+          <div class="product_name pl-3" style="font-size: 20px;">Product details of
+            {{ $singleProduct->product_name }}.
           </div>
         </div>
         <div class="card-body">
@@ -183,32 +246,76 @@
         </div>
       </div>
 
-      <div class="card mt-5">
+      <div class="card mt-5" id="review">
         <div class="card-header">
-          <div class="product_name pl-3" style="font-size: 20px;">Rating & Reviews of {{ $singleProduct->product_name }}.
+          <div class="product_name pl-3" style="font-size: 20px;">Rating & Reviews of
+            {{ $singleProduct->product_name }}.
 
           </div>
         </div>
         <div class="card-body row">
           <div class="col-3">
+            {{-- Average rating for this product   --}}
             <p>Average Reviews of {{ $singleProduct->product_name }}.</p>
             <div class="rating_r rating_r_4 product_rating">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
+              @if ($sum_rating == null)
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span> (0)</span>
+              @elseif ($sum_rating != null)
+                @if ($sum_rating / $count_rating == 5 || $sum_rating / $count_rating >= 4.5)
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                @elseif ($sum_rating / $count_rating < 4.5 && $sum_rating / $count_rating >= 3.5)
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                @elseif ($sum_rating / $count_rating < 3.5 && $sum_rating / $count_rating >= 2.5)
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star "></span>
+                  <span class="fa fa-star"></span>
+                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                @elseif ($sum_rating / $count_rating < 2.5 && $sum_rating / $count_rating >= 1.5)
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star "></span>
+                  <span class="fa fa-star "></span>
+                  <span class="fa fa-star"></span>
+                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                @else
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star "></span>
+                  <span class="fa fa-star "></span>
+                  <span class="fa fa-star "></span>
+                  <span class="fa fa-star"></span>
+                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                @endif
+              @endif
             </div>
           </div>
           <div class="col-3">
             <p>Total review of this product</p>
+            {{-- All review   --}}
+
             <div class="rating_r rating_r_4 product_rating">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
-              <span class="pl-2">total 00</span>
+              <span class="pl-2">total {{ $rating5 }}</span>
             </div>
             <div class="rating_r rating_r_4 product_rating">
               <span class="fa fa-star checked"></span>
@@ -216,7 +323,7 @@
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star"></span>
-              <span class="pl-2">total 00</span>
+              <span class="pl-2">total {{ $rating4 }}</span>
             </div>
             <div class="rating_r rating_r_4 product_rating">
               <span class="fa fa-star checked"></span>
@@ -224,7 +331,7 @@
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star "></span>
               <span class="fa fa-star"></span>
-              <span class="pl-2">total 00</span>
+              <span class="pl-2">total {{ $rating3 }}</span>
             </div>
             <div class="rating_r rating_r_4 product_rating">
               <span class="fa fa-star checked"></span>
@@ -232,7 +339,7 @@
               <span class="fa fa-star "></span>
               <span class="fa fa-star "></span>
               <span class="fa fa-star"></span>
-              <span class="pl-2">total 00</span>
+              <span class="pl-2">total {{ $rating2 }}</span>
             </div>
             <div class="rating_r rating_r_4 product_rating">
               <span class="fa fa-star checked"></span>
@@ -240,8 +347,9 @@
               <span class="fa fa-star "></span>
               <span class="fa fa-star "></span>
               <span class="fa fa-star"></span>
-              <span class="pl-2">total 00</span>
+              <span class="pl-2">total {{ $rating1 }}</span>
             </div>
+
 
           </div>
           <div class="col-6">
@@ -273,13 +381,15 @@
           </div>
 
         </div>
+        <br><br>
         {{-- All reviews of this product --}}
         <strong class="pl-4">All review of {{ $singleProduct->product_name }}</strong><br>
         <div class="row">
           @foreach ($review as $row)
-            <div class="card col-lg-12 col-md-12 col-sm-12 ml-3">
-              <div class="card-header">
-                {{ $row->user->name }} ({{ date('d F , Y'), strtotime($row->review_date) }})
+            <div class="card col-lg-11 col-md-11 col-sm-11 ml-3 my-2">
+              <div class="card-header" style="display: flex; justify-content:space-between;">
+                <strong>{{ $row->user->name }}</strong>
+                <span style="font-size: 12px"> ({{ date('d F , Y'), strtotime($row->review_date) }})</span>
               </div>
               <div class="card-body">
                 {{ $row->review }}
@@ -307,7 +417,6 @@
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star "></span>
                     <span class="fa fa-star "></span>
-
                   </div>
                 @elseif ($row->rating == 2)
                   <div class="rating_r rating_r_4 product_rating">
