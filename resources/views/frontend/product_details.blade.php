@@ -81,35 +81,51 @@
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
-                      <a href="#review" class="pl-2">{{ $sum_rating / $count_rating }} Ratings</a>
+                      @php
+                      $rat = $sum_rating / $count_rating;
+                    @endphp
+                      <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>
                     @elseif ($sum_rating / $count_rating < 4.5 && $sum_rating / $count_rating >= 3.5)
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star"></span>
-                      <a href="#review" class="pl-2">{{ $sum_rating / $count_rating }} Ratings</a>
+                      @php
+                      $rat = $sum_rating / $count_rating;
+                    @endphp
+                      <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>>
                     @elseif ($sum_rating / $count_rating < 3.5 && $sum_rating / $count_rating >= 2.5)
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star "></span>
                       <span class="fa fa-star"></span>
-                      <a href="#review" class="pl-2">{{ floatval($sum_rating / $count_rating )}} Ratings</a>
-                    @elseif ($sum_rating / $count_rating < 2.5 && $sum_rating / $count_rating >= 1.5)
+                      @php
+                      $rat = $sum_rating / $count_rating;
+                    @endphp
+                      <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>
+                   
+                      @elseif ($sum_rating / $count_rating < 2.5 && $sum_rating / $count_rating >= 1.5)
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star "></span>
                       <span class="fa fa-star "></span>
                       <span class="fa fa-star"></span>
-                      <a href="#review" class="pl-2">{{ $sum_rating / $count_rating }} Ratings</a>
+                      @php
+                      $rat = $sum_rating / $count_rating;
+                    @endphp
+                      <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>
                     @else
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star "></span>
                       <span class="fa fa-star "></span>
                       <span class="fa fa-star "></span>
                       <span class="fa fa-star"></span>
-                      <a href="#review" class="pl-2">{{ $sum_rating / $count_rating }} Ratings</a>
+                      @php
+                      $rat = $sum_rating / $count_rating;
+                    @endphp
+                      <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>
                     @endif
                   @endif
                 </div>
@@ -203,12 +219,20 @@
                     @endif
 
                     <div class="button_container">
-                      <button type="button" class="button cart_button">
+                      {{-- <button type="button" class="button cart_button">
                         Add to Cart
                       </button>
                       <div class="product_fav">
-                        <i class="fas fa-heart"></i>
-                      </div>
+                        <a href="" class="btn btn-outline-info" type="button">Add to Wishlist</a>
+                      </div> --}}
+
+                      {{-- <div class="input-group mb-3"> --}}
+                        <div class="input-group-prepend">
+                          <button class="btn btn-sm btn-primary" type="submit"> Add to Cart</button>
+                          <a href="{{route('add.wishlist',$singleProduct->id)}}" class="btn btn-sm btn-warning" type="button">Add to Wishlist</a>
+                        </div>
+                      
+                      {{-- </div> --}}
                     </div>
                   </form>
                 </div>
@@ -272,35 +296,50 @@
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
-                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                  @php
+                  $rat = $sum_rating / $count_rating;
+                @endphp
+                  <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>
                 @elseif ($sum_rating / $count_rating < 4.5 && $sum_rating / $count_rating >= 3.5)
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star"></span>
-                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                  @php
+                  $rat = $sum_rating / $count_rating;
+                @endphp
+                  <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>
                 @elseif ($sum_rating / $count_rating < 3.5 && $sum_rating / $count_rating >= 2.5)
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star "></span>
                   <span class="fa fa-star"></span>
-                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                  @php
+                  $rat = $sum_rating / $count_rating;
+                @endphp
+                  <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>
                 @elseif ($sum_rating / $count_rating < 2.5 && $sum_rating / $count_rating >= 1.5)
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star "></span>
                   <span class="fa fa-star "></span>
                   <span class="fa fa-star"></span>
-                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                  @php
+                  $rat = $sum_rating / $count_rating;
+                @endphp
+                  <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>
                 @else
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star "></span>
                   <span class="fa fa-star "></span>
                   <span class="fa fa-star "></span>
                   <span class="fa fa-star"></span>
-                  <span class="pl-2">{{ $sum_rating / $count_rating }} Ratings</span>
+                  @php
+                  $rat = $sum_rating / $count_rating;
+                @endphp
+                  <a href="#review" class="pl-2">{{number_format($rat,1);}} Ratings</a>
                 @endif
               @endif
             </div>

@@ -25,5 +25,7 @@ Route::group([],function () {
     Route::get('product/product-details/{slug}', [IndexController::class, 'productDetails'])->name('product.product_details');
     // review route 
     Route::post('store/review', [ReviewController::class, 'storeReview'])->name('store.review');
+    // wishlist route 
+    Route::get('add/wishlist/{id}', [ReviewController::class, 'AddWishlist'])->name('add.wishlist');
 });
 
