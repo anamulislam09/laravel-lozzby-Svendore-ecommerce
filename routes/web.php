@@ -13,9 +13,9 @@ Route::get('/login', function(){
     return redirect()->back();
 })->name('login');
 
-Route::get('/register', function(){
-    return redirect()->to('/');
-})->name('register');
+// Route::get('/register', function(){
+//     return redirect()->to('/');
+// })->name('register');
 
 Route::get('/logout', [IndexController::class, 'logout'])->name('customer.logout');
 

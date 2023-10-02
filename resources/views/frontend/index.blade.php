@@ -1,29 +1,31 @@
 @extends('layouts.app')
 
 @section('navbar')
-{{-- main navbar start here  --}}
-@include('layouts.frontend_partial.main_nav')
-{{-- main navbar ends here  --}}
+  {{-- main navbar start here  --}}
+  @include('layouts.frontend_partial.main_nav')
+  {{-- main navbar ends here  --}}
 @endsection
 
 @section('content')
-
-<div class="banner">
-    <div class="banner_background"
-      style="background-image:url({{ asset('frontend/images/banner_background.jpg') }})"></div>
+  <div class="banner">
+    <div class="banner_background" style="background-image:url({{ asset('frontend/images/banner_background.jpg') }})"></div>
     <div class="container fill_height">
       <div class="row fill_height">
-        <div class="banner_product_image"><img src="{{$bannerproduct->product_thumbnail}}" alt="{{$bannerproduct->product_name}}" style="width: 500px"></div>
+        <div class="banner_product_image"><img src="{{ $bannerproduct->product_thumbnail }}"
+            alt="{{ $bannerproduct->product_name }}" style="width: 500px"></div>
         <div class="col-lg-5 offset-lg-4 fill_height">
           <div class="banner_content">
-            <h1 class="banner_text">{{$bannerproduct->product_name}}</h1>
-            @if ($bannerproduct->descount_price==Null)
-            <div class="banner_price">{{$setting->currency}}{{$bannerproduct->selling_price}}</div>
+            <h1 class="banner_text">{{ $bannerproduct->product_name }}</h1>
+            @if ($bannerproduct->descount_price == null)
+              <div class="banner_price">{{ $setting->currency }}{{ $bannerproduct->selling_price }}</div>
             @else
-            <div class="banner_price"><span>{{$setting->currency}}{{$bannerproduct->selling_price}}</span>{{$setting->currency}}{{$bannerproduct->descount_price}}</div>
+              <div class="banner_price">
+                <span>{{ $setting->currency }}{{ $bannerproduct->selling_price }}</span>{{ $setting->currency }}{{ $bannerproduct->descount_price }}
+              </div>
             @endif
-            <div class="banner_product_name">{{$bannerproduct->brand->brand_name}}</div>
-            <div class="button banner_button"><a href="{{route('product.product_details', $bannerproduct->product_slug)}}">Shop Now</a></div>
+            <div class="banner_product_name">{{ $bannerproduct->brand->brand_name }}</div>
+            <div class="button banner_button"><a
+                href="{{ route('product.product_details', $bannerproduct->product_slug) }}">Shop Now</a></div>
           </div>
         </div>
       </div>
@@ -234,8 +236,93 @@
                 </ul>
                 <div class="tabs_line"><span></span></div>
               </div>
+{{-- 
+              <div class="product_panel panel active pb-5">
+                <div class="featured_slider slider pt-5 row"> --}}
 
-              <div class="product_panel panel active">
+                  {{-- @foreach ($featured as $fItem)
+                    <div class="featured_slider_item col-3 col-lg-3 col-md-3 col-sm-6">
+                      <div class="border_active"></div>
+                      <div
+                        class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                        <div data-toggle="modal" data-target="#exampleModal">
+                          <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                              src="{{ $fItem->product_thumbnail }}" alt></div>
+                          <div class="product_content">
+                            <div class="product_price discount">
+                              @if ($fItem->descount_price == null)
+                               {{ $setting->currency }}{{ $fItem->selling_price }}
+                                
+                              @else
+                                
+                                  <span>{{ $setting->currency }}{{ $fItem->selling_price }}</span>{{ $setting->currency }}{{ $fItem->descount_price }}
+                                
+                              @endif
+                            </div>
+                            <div class="product_name">
+                              <div><a href="#">{{ substr($fItem->product_name, 0, 20) }}...</a></div>
+                            </div>
+                            <div class="product_extras">
+                              <div class="product_color">
+                                <input type="radio" checked name="product_color" style="background:#b19c83">
+                                <input type="radio" name="product_color" style="background:#000000">
+                                <input type="radio" name="product_color" style="background:#999999">
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <button class="product_cart_button">Add to Cart</button>
+                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                        <ul class="product_marks">
+                          <li class="product_mark product_discount">-25%</li>
+                          <li class="product_mark product_new">new</li>
+                        </ul>
+                      </div>
+                    </div>
+                  @endforeach --}}
+                <div class="row">
+                  @foreach ($featured as $fItem)
+                  <div class="f_product">
+                      <div class="product_item">
+                        
+                          <div class="product_image "><img src="{{ $fItem->product_thumbnail }}" alt></div>
+                          <div class="product_content">
+                            <div class="product_price discount">
+                              @if ($fItem->descount_price == null)
+                               {{ $setting->currency }}{{ $fItem->selling_price }}
+                                
+                              @else
+                                
+                                  <span>{{ $setting->currency }}{{ $fItem->selling_price }}</span>{{ $setting->currency }}{{ $fItem->descount_price }}
+                                
+                              @endif
+                            </div>
+                            <div class="product_name">
+                           <a href="{{ route('product.product_details', $fItem->product_slug) }}">{{ substr($fItem->product_name, 0, 20) }}...</a>
+                            </div>
+                            {{-- <div>
+                              <a href="#" data-toggle="modal" data-target="#exampleModal">Quick view</a>
+                            </div> --}}
+                          </div>
+                        
+                        <button class="btn btn-sm btn-primary cart">Add to Cart</button>
+                        <a href="#" class="quick_view" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="{{route('add.wishlist', $fItem->id)}}" class="product_fav"><i class="fas fa-heart"></i></a>
+                       
+                        {{-- <ul class="product_marks">
+                          <li class="product_mark product_discount">-25%</li>
+                        </ul> --}}
+                      </div>
+                      </div>
+                      @endforeach
+                </div>
+                {{-- </div>
+                <div class="featured_slider_dots_cover pt-5"></div>
+              </div> --}}
+ 
+
+              <div class="product_panel panel">
                 <div class="featured_slider slider">
 
                   <div class="featured_slider_item">
@@ -296,8 +383,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_3.png') }}" alt></div>
                       <div class="product_content">
@@ -352,8 +438,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_5.png') }}" alt></div>
                       <div class="product_content">
@@ -380,8 +465,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_6.png') }}" alt></div>
                       <div class="product_content">
@@ -436,8 +520,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_8.png') }}" alt></div>
                       <div class="product_content">
@@ -464,8 +547,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_1.png') }}" alt></div>
                       <div class="product_content">
@@ -492,8 +574,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_2.png') }}" alt></div>
                       <div class="product_content">
@@ -520,8 +601,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_3.png') }}" alt></div>
                       <div class="product_content">
@@ -548,8 +628,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_4.png') }}" alt></div>
                       <div class="product_content">
@@ -576,8 +655,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_5.png') }}" alt></div>
                       <div class="product_content">
@@ -604,8 +682,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_6.png') }}" alt></div>
                       <div class="product_content">
@@ -632,8 +709,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_7.png') }}" alt></div>
                       <div class="product_content">
@@ -660,8 +736,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_8.png') }}" alt></div>
                       <div class="product_content">
@@ -750,8 +825,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_3.png') }}" alt></div>
                       <div class="product_content">
@@ -806,8 +880,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_5.png') }}" alt></div>
                       <div class="product_content">
@@ -834,8 +907,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_6.png') }}" alt></div>
                       <div class="product_content">
@@ -890,8 +962,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_8.png') }}" alt></div>
                       <div class="product_content">
@@ -918,8 +989,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_1.png') }}" alt></div>
                       <div class="product_content">
@@ -946,8 +1016,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_2.png') }}" alt></div>
                       <div class="product_content">
@@ -974,8 +1043,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_3.png') }}" alt></div>
                       <div class="product_content">
@@ -1002,8 +1070,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_4.png') }}" alt></div>
                       <div class="product_content">
@@ -1030,8 +1097,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_5.png') }}" alt></div>
                       <div class="product_content">
@@ -1058,8 +1124,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_6.png') }}" alt></div>
                       <div class="product_content">
@@ -1086,8 +1151,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_7.png') }}" alt></div>
                       <div class="product_content">
@@ -1114,462 +1178,7 @@
 
                   <div class="featured_slider_item">
                     <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_8.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$225</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Huawei MediaPad...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="featured_slider_dots_cover"></div>
-              </div>
-
-              <div class="product_panel panel">
-                <div class="featured_slider slider">
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_1.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price discount">$225<span>$300</span></div>
-                        <div class="product_name">
-                          <div><a href="product.html">Huawei MediaPad...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount">-25%</li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_2.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$379</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Apple iPod shuffle</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button active">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_3.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$379</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Sony MDRZX310W</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_4.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price discount">$225<span>$300</span></div>
-                        <div class="product_name">
-                          <div><a href="product.html">LUNA Smartphone</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount">-25%</li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_5.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$225</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Canon STM Kit...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_6.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$379</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Samsung J330F...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_7.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$379</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Lenovo IdeaPad</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount">-25%</li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_8.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$225</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Digitus EDNET...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_1.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$225</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Huawei MediaPad...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_2.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$379</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Huawei MediaPad...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_3.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$379</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Huawei MediaPad...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_4.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$225</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Huawei MediaPad...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_5.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$225</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Huawei MediaPad...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_6.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$379</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Huawei MediaPad...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                      <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                          src="{{ asset('frontend/images/featured_7.png') }}" alt></div>
-                      <div class="product_content">
-                        <div class="product_price">$379</div>
-                        <div class="product_name">
-                          <div><a href="product.html">Huawei MediaPad...</a></div>
-                        </div>
-                        <div class="product_extras">
-                          <div class="product_color">
-                            <input type="radio" checked name="product_color" style="background:#b19c83">
-                            <input type="radio" name="product_color" style="background:#000000">
-                            <input type="radio" name="product_color" style="background:#999999">
-                          </div>
-                          <button class="product_cart_button">Add to Cart</button>
-                        </div>
-                      </div>
-                      <div class="product_fav"><i class="fas fa-heart"></i></div>
-                      <ul class="product_marks">
-                        <li class="product_mark product_discount"></li>
-                        <li class="product_mark product_new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="featured_slider_item">
-                    <div class="border_active"></div>
-                    <div
-                      class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                       <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
                           src="{{ asset('frontend/images/featured_8.png') }}" alt></div>
                       <div class="product_content">
@@ -1610,10 +1219,10 @@
           <div class="popular_categories_content">
             <div class="popular_categories_title">Popular Categories</div>
             <div class="popular_categories_slider_nav">
-              <div class="popular_categories_prev popular_categories_nav"><i
-                  class="fas fa-angle-left ml-auto"></i></div>
-              <div class="popular_categories_next popular_categories_nav"><i
-                  class="fas fa-angle-right ml-auto"></i></div>
+              <div class="popular_categories_prev popular_categories_nav"><i class="fas fa-angle-left ml-auto"></i>
+              </div>
+              <div class="popular_categories_next popular_categories_nav"><i class="fas fa-angle-right ml-auto"></i>
+              </div>
             </div>
             <div class="popular_categories_link"><a href="#">full catalog</a></div>
           </div>
@@ -1625,40 +1234,40 @@
 
               <div class="owl-item">
                 <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_1.png') }}"
-                      alt></div>
+                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_1.png') }}" alt>
+                  </div>
                   <div class="popular_category_text">Smartphones & Tablets</div>
                 </div>
               </div>
 
               <div class="owl-item">
                 <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_2.png') }}"
-                      alt></div>
+                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_2.png') }}" alt>
+                  </div>
                   <div class="popular_category_text">Computers & Laptops</div>
                 </div>
               </div>
 
               <div class="owl-item">
                 <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_3.png') }}"
-                      alt></div>
+                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_3.png') }}" alt>
+                  </div>
                   <div class="popular_category_text">Gadgets</div>
                 </div>
               </div>
 
               <div class="owl-item">
                 <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_4.png') }}"
-                      alt></div>
+                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_4.png') }}" alt>
+                  </div>
                   <div class="popular_category_text">Video Games & Consoles</div>
                 </div>
               </div>
 
               <div class="owl-item">
                 <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_5.png') }}"
-                      alt></div>
+                  <div class="popular_category_image"><img src="{{ asset('frontend/images/popular_5.png') }}" alt>
+                  </div>
                   <div class="popular_category_text">Accessories</div>
                 </div>
               </div>
@@ -1693,8 +1302,8 @@
                 </div>
                 <div class="col-lg-8 col-md-6 fill_height">
                   <div class="banner_2_image_container">
-                    <div class="banner_2_image"><img src="{{ asset('frontend/images/banner_2_product.png') }}"
-                        alt></div>
+                    <div class="banner_2_image"><img src="{{ asset('frontend/images/banner_2_product.png') }}" alt>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1718,8 +1327,8 @@
                 </div>
                 <div class="col-lg-8 col-md-6 fill_height">
                   <div class="banner_2_image_container">
-                    <div class="banner_2_image"><img src="{{ asset('frontend/images/banner_2_product.png') }}"
-                        alt></div>
+                    <div class="banner_2_image"><img src="{{ asset('frontend/images/banner_2_product.png') }}" alt>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1743,8 +1352,8 @@
                 </div>
                 <div class="col-lg-8 col-md-6 fill_height">
                   <div class="banner_2_image_container">
-                    <div class="banner_2_image"><img src="{{ asset('frontend/images/banner_2_product.png') }}"
-                        alt></div>
+                    <div class="banner_2_image"><img src="{{ asset('frontend/images/banner_2_product.png') }}" alt>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2744,8 +2353,9 @@
                       <div class="border_active"></div>
                       <div
                         class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                            src="{{ asset('frontend/images/new_3.jpg') }}" alt></div>
+                        <div class="product_image d-flex flex-column align-items-center justify-content-center"
+                          style="height: 100px; width:80px"><img src="{{ asset('frontend/images/new_3.jpg') }}" alt>
+                        </div>
                         <div class="product_content">
                           <div class="product_price">$379</div>
                           <div class="product_name">
@@ -3138,8 +2748,8 @@
               <div class="col-lg-3">
                 <div class="arrivals_single clearfix">
                   <div class="d-flex flex-column align-items-center justify-content-center">
-                    <div class="arrivals_single_image"><img src="{{ asset('frontend/images/new_single.png') }}"
-                        alt></div>
+                    <div class="arrivals_single_image"><img src="{{ asset('frontend/images/new_single.png') }}" alt>
+                    </div>
                     <div class="arrivals_single_content">
                       <div class="arrivals_single_category"><a href="#">Smartphones</a></div>
                       <div class="arrivals_single_name_container clearfix">
@@ -4347,4 +3957,41 @@
       </div>
     </div>
   </div>
-@endsection
+
+  {{-- single product model start here --}}
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-4">
+              <div class="image">
+                <img src="" alt="">
+              </div>
+            </div>
+            <div class="col-8">
+              <p>this is content section</p>
+            </div>
+          </div>
+        </div>
+        {{-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Send message</button>
+        </div> --}}
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+    integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+  @endsection

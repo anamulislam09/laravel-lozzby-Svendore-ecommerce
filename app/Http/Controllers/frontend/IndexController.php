@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Review;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -13,7 +14,9 @@ class IndexController extends Controller
     public function index(){
         $category = Category::all();
         $bannerproduct = Product::where('product_slider', 1)->latest()->first();
-        return view('frontend.index', compact('category','bannerproduct'));
+        $featured = Product::where('featured', 1)->orderBy('id','DESC')->limit(8)->get();
+
+        return view('frontend.index', compact('category','bannerproduct','featured'));
     }
 
     // show single product 
@@ -28,7 +31,7 @@ class IndexController extends Controller
 
     public function logout(){
         Auth()->logout();
-        $notification = array('message'=>'You are logout out','alert_type'=>'success');
+        $notification = array('message'=>'You are logout out','alert_type'=>'danger');
         return redirect()->back()->with($notification);
     }
 
