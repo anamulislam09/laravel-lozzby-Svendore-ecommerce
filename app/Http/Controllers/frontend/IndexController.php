@@ -15,9 +15,10 @@ class IndexController extends Controller
         $category = Category::all();
         $bannerproduct = Product::where('product_slider', 1)->latest()->first();
         $featured = Product::where('status', 1)->where('featured', 1)->orderBy('id','DESC')->limit(5)->get();
-        $featured = Product::where('status', 1)->where('featured', 1)->orderBy('product_views','DESC')->limit(5)->get();
+        $popular = Product::where('status', 1)->orderBy('product_views','DESC')->limit(5)->get();
+        $trendy = Product::where('status', 1)->where('trendy', 1)->orderBy('product_views','DESC')->limit(5)->get();
 
-        return view('frontend.index', compact('category','bannerproduct','featured'));
+        return view('frontend.index', compact('category','bannerproduct','featured' ,'popular' , 'trendy'));
     }
 
     // show single product 

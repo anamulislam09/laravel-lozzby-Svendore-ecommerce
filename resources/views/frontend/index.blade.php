@@ -235,37 +235,37 @@
                 </ul>
               </div>
               <hr class="pb-2">
-                <div class="row">
-                  @foreach ($featured as $fItem)
+              <div class="row">
+                @foreach ($featured as $fItem)
                   <div class="f_product">
-                      <div class="product_item">
-                        
-                          <div class="product_image "><img src="{{ $fItem->product_thumbnail }}" alt></div>
-                          <div class="product_content">
-                            <div class="product_price discount">
-                              @if ($fItem->descount_price == null)
-                               {{ $setting->currency }}{{ $fItem->selling_price }}
-                                
-                              @else
-                                
-                                  <span>{{ $setting->currency }}{{ $fItem->selling_price }}</span>{{ $setting->currency }}{{ $fItem->descount_price }}
-                                
-                              @endif
-                            </div>
-                            <div class="product_name">
-                           <a href="{{ route('product.product_details', $fItem->product_slug) }}">{{ substr($fItem->product_name, 0, 20) }}...</a>
-                            </div>
-                          </div>
-                        
-                        <button class="btn btn-sm btn-primary cart">Add to Cart</button>
-                        <a href="#" class="quick_view" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <a href="{{route('add.wishlist', $fItem->id)}}" class="product_fav"><i class="fas fa-heart"></i></a>
-                       
+                    <div class="product_item">
+
+                      <div class="product_image "><img src="{{ $fItem->product_thumbnail }}" alt></div>
+                      <div class="product_content">
+                        <div class="product_price discount">
+                          @if ($fItem->descount_price == null)
+                            {{ $setting->currency }}{{ $fItem->selling_price }}
+                          @else
+                            <span>{{ $setting->currency }}{{ $fItem->selling_price }}</span>{{ $setting->currency }}{{ $fItem->descount_price }}
+                          @endif
+                        </div>
+                        <div class="product_name">
+                          <a
+                            href="{{ route('product.product_details', $fItem->product_slug) }}">{{ substr($fItem->product_name, 0, 20) }}...</a>
+                        </div>
                       </div>
-                      </div>
-                      @endforeach
-                </div>
-                {{-- Featured product ends here --}}
+
+                      <button class="btn btn-sm btn-primary cart">Add to Cart</button>
+                      <a href="#" class="quick_view" data-toggle="modal" data-target="#exampleModal"><i
+                          class="fa fa-eye" aria-hidden="true"></i></a>
+                      <a href="{{ route('add.wishlist', $fItem->id) }}" class="product_fav"><i
+                          class="fas fa-heart"></i></a>
+
+                    </div>
+                  </div>
+                @endforeach
+              </div>
+              {{-- Featured product ends here --}}
             </div>
           </div>
         </div>
@@ -276,45 +276,44 @@
   {{-- Most Popular product start here --}}
 
   <div class="container py-5">
-   <div>
+    <div>
       <div class="tabs ">
         <ul class="clearfix">
           <li class="active">Most Popular Products</li>
         </ul>
       </div>
       <hr class="pb-2">
-        <div class="row">
-          <div class="col-lg-1 col-md-1 col-sm-12"></div>
-          @foreach ($featured as $fItem)
+      <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-12"></div>
+        @foreach ($popular as $row)
           <div class="f_product col-lg-2 col-md-3 col-sm-6">
-              {{-- <div class="product_item"> --}}
-                
-                  <div class="product_image "><img src="{{ $fItem->product_thumbnail }}" alt></div>
-                  <div class="product_content">
-                    <div class="product_price discount">
-                      @if ($fItem->descount_price == null)
-                       {{ $setting->currency }}{{ $fItem->selling_price }}
-                        
-                      @else
-                        
-                          <span>{{ $setting->currency }}{{ $fItem->selling_price }}</span>{{ $setting->currency }}{{ $fItem->descount_price }}
-                        
-                      @endif
-                    </div>
-                    <div class="product_name">
-                   <a href="{{ route('product.product_details', $fItem->product_slug) }}">{{ substr($fItem->product_name, 0, 20) }}...</a>
-                    </div>
-                  </div>
-                
-                <button class="btn btn-sm btn-primary cart">Add to Cart</button>
-                <a href="#" class="quick_view" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                <a href="{{route('add.wishlist', $fItem->id)}}" class="product_fav"><i class="fas fa-heart"></i></a>
-               
+            {{-- <div class="product_item"> --}}
+
+            <div class="product_image "><img src="{{ $row->product_thumbnail }}" alt></div>
+            <div class="product_content">
+              <div class="product_price discount">
+                @if ($row->descount_price == null)
+                  {{ $setting->currency }}{{ $row->selling_price }}
+                @else
+                  <span>{{ $setting->currency }}{{ $row->selling_price }}</span>{{ $setting->currency }}{{ $row->descount_price }}
+                @endif
               </div>
-              {{-- </div> --}}
-              @endforeach
-        </div>
-  </div>
+              <div class="product_name">
+                <a
+                  href="{{ route('product.product_details', $row->product_slug) }}">{{ substr($row->product_name, 0, 20) }}...</a>
+              </div>
+            </div>
+
+            <button class="btn btn-sm btn-primary cart">Add to Cart</button>
+            <a href="#" class="quick_view" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eye"
+                aria-hidden="true"></i></a>
+            <a href="{{ route('add.wishlist', $row->id) }}" class="product_fav"><i class="fas fa-heart"></i></a>
+
+          </div>
+          {{-- </div> --}}
+        @endforeach
+      </div>
+    </div>
   </div>
   {{-- Most Popular product ends here --}}
 
@@ -2608,6 +2607,9 @@
     </div>
   </div>
 
+
+  {{-- Trendy Products start here  --}}
+
   <div class="trends">
     <div class="trends_background"
       style="background-image:url({{ asset('frontend/images/trends_background.jpg') }})"></div>
@@ -2617,9 +2619,9 @@
 
         <div class="col-lg-3">
           <div class="trends_container">
-            <h2 class="trends_title">Trends 2018</h2>
+            <h2 class="trends_title">Trendy Products</h2>
             <div class="trends_text">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing Donec et.</p>
+              <p>Best trendy products for you.</p>
             </div>
             <div class="trends_slider_nav">
               <div class="trends_prev trends_nav"><i class="fas fa-angle-left ml-auto"></i></div>
@@ -2628,130 +2630,52 @@
           </div>
         </div>
 
+          {{-- Trendy single Products start here  --}}
         <div class="col-lg-9">
           <div class="trends_slider_container">
-
             <div class="owl-carousel owl-theme trends_slider">
-
-              <div class="owl-item">
-                <div class="trends_item is_new">
-                  <div class="trends_image d-flex flex-column align-items-center justify-content-center"><img
-                      src="{{ asset('frontend/images/trends_1.jpg') }}" alt></div>
-                  <div class="trends_content">
-                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                    <div class="trends_info clearfix">
-                      <div class="trends_name"><a href="product.html">Jump White</a></div>
-                      <div class="trends_price">$379</div>
+              @foreach ($trendy as $row)
+                <div class="owl-item">
+                  <div class="trends_item is_new">
+                    <div class="trends_image d-flex flex-column align-items-center justify-content-center"><img
+                        src="{{ $row->product_thumbnail }}" alt></div>
+                    <div class="trends_content">
+                      <div class="trends_category"><a href="#">{{ $row->subcategory->subcategory_name }}</a>
+                        <div class="trends_price">
+                          @if ($row->descount_price == null)
+                            {{ $setting->currency }}{{ $row->selling_price }}
+                          @else
+                            <del
+                              class="pr_discount">{{ $setting->currency }}{{ $row->selling_price }}</del>{{ $setting->currency }}{{ $row->descount_price }}
+                          @endif
+                        </div>
+                      </div>
+                      
+                      <div class="trends_info clearfix">
+                        <div class="trends_name"><a
+                            href="{{ route('product.product_details', $row->product_slug) }}">{{ substr($row->product_name, 0, 20) }}...</a>
+                        </div>
+                       
+                      </div>
                     </div>
+                    <ul class="trends_marks">
+                      <li class="trends_mark trends_new" class="" data-toggle="modal"
+                        data-target="#exampleModal"><i class="fa fa-eye" aria-hidden="true"></i></li>
+                    </ul>
+                    <a href="{{ route('add.wishlist', $row->id) }}" class="trends_fav"><i
+                        class="fas fa-heart"></i></a>
                   </div>
-                  <ul class="trends_marks">
-                    <li class="trends_mark trends_discount">-25%</li>
-                    <li class="trends_mark trends_new">new</li>
-                  </ul>
-                  <div class="trends_fav"><i class="fas fa-heart"></i></div>
                 </div>
-              </div>
+              @endforeach
 
-              <div class="owl-item">
-                <div class="trends_item">
-                  <div class="trends_image d-flex flex-column align-items-center justify-content-center"><img
-                      src="{{ asset('frontend/images/trends_2.jpg') }}" alt></div>
-                  <div class="trends_content">
-                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                    <div class="trends_info clearfix">
-                      <div class="trends_name"><a href="product.html">Samsung Charm...</a></div>
-                      <div class="trends_price">$379</div>
-                    </div>
-                  </div>
-                  <ul class="trends_marks">
-                    <li class="trends_mark trends_discount">-25%</li>
-                    <li class="trends_mark trends_new">new</li>
-                  </ul>
-                  <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                </div>
-              </div>
-
-              <div class="owl-item">
-                <div class="trends_item is_new">
-                  <div class="trends_image d-flex flex-column align-items-center justify-content-center"><img
-                      src="{{ asset('frontend/images/trends_3.jpg') }}" alt></div>
-                  <div class="trends_content">
-                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                    <div class="trends_info clearfix">
-                      <div class="trends_name"><a href="product.html">DJI Phantom 3...</a></div>
-                      <div class="trends_price">$379</div>
-                    </div>
-                  </div>
-                  <ul class="trends_marks">
-                    <li class="trends_mark trends_discount">-25%</li>
-                    <li class="trends_mark trends_new">new</li>
-                  </ul>
-                  <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                </div>
-              </div>
-
-              <div class="owl-item">
-                <div class="trends_item is_new">
-                  <div class="trends_image d-flex flex-column align-items-center justify-content-center"><img
-                      src="{{ asset('frontend/images/trends_1.jpg') }}" alt></div>
-                  <div class="trends_content">
-                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                    <div class="trends_info clearfix">
-                      <div class="trends_name"><a href="product.html">Jump White</a></div>
-                      <div class="trends_price">$379</div>
-                    </div>
-                  </div>
-                  <ul class="trends_marks">
-                    <li class="trends_mark trends_discount">-25%</li>
-                    <li class="trends_mark trends_new">new</li>
-                  </ul>
-                  <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                </div>
-              </div>
-
-              <div class="owl-item">
-                <div class="trends_item">
-                  <div class="trends_image d-flex flex-column align-items-center justify-content-center"><img
-                      src="{{ asset('frontend/images/trends_2.jpg') }}" alt></div>
-                  <div class="trends_content">
-                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                    <div class="trends_info clearfix">
-                      <div class="trends_name"><a href="product.html">Jump White</a></div>
-                      <div class="trends_price">$379</div>
-                    </div>
-                  </div>
-                  <ul class="trends_marks">
-                    <li class="trends_mark trends_discount">-25%</li>
-                    <li class="trends_mark trends_new">new</li>
-                  </ul>
-                  <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                </div>
-              </div>
-
-              <div class="owl-item">
-                <div class="trends_item is_new">
-                  <div class="trends_image d-flex flex-column align-items-center justify-content-center"><img
-                      src="{{ asset('frontend/images/trends_3.jpg') }}" alt></div>
-                  <div class="trends_content">
-                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                    <div class="trends_info clearfix">
-                      <div class="trends_name"><a href="product.html">Jump White</a></div>
-                      <div class="trends_price">$379</div>
-                    </div>
-                  </div>
-                  <ul class="trends_marks">
-                    <li class="trends_mark trends_discount">-25%</li>
-                    <li class="trends_mark trends_new">new</li>
-                  </ul>
-                  <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                </div>
-              </div>
+  {{-- Trendy Products ends here  --}}
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  {{-- Trendy Products ends here  --}}
 
   <div class="reviews">
     <div class="container">
