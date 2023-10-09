@@ -275,6 +275,11 @@
                     <input type="checkbox" name="status" value="1" checked data-bootstrap-switch data-off-color="danger"
                       data-on-color="success">
                   </div>
+                  <div class="card p-4">
+                    <h6> product trendy</h6>
+                    <input type="checkbox" name="trendy" value="1" checked data-bootstrap-switch data-off-color="danger"
+                      data-on-color="success">
+                  </div>
 
                 </div>
                 <!-- /.card-body -->

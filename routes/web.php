@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\frontend\ProductController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\frontend\ReviewController;
@@ -26,6 +27,6 @@ Route::group([],function () {
     // review route 
     Route::post('store/review', [ReviewController::class, 'storeReview'])->name('store.review');
     // wishlist route 
-    Route::get('add/wishlist/{id}', [ReviewController::class, 'AddWishlist'])->name('add.wishlist');
+    Route::get('add/wishlist/{id}', [ProductController::class, 'AddWishlist'])->name('add.wishlist');
 });
 

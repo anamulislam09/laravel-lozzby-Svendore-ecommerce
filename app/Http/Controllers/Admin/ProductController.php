@@ -221,6 +221,7 @@ class ProductController extends Controller
             'featured' => $request->featured,
             'product_slider' => $request->product_slider,
             'status' => $request->status,
+            'trendy' => $request->trendy,
             'today_deal' => $request->today_deal,
             'cash_on_delivery' => $request->cash_on_delivery,
             'admin_id' => Auth::id(),

@@ -24,6 +24,7 @@
     // average rating
     $sum_rating = App\Models\Review::where('product_id', $singleProduct->id)->sum('rating');
     $count_rating = App\Models\Review::where('product_id', $singleProduct->id)->count('rating');
+
   @endphp
 
   <div class="single_product">
