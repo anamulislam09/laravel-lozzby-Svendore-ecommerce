@@ -84,7 +84,7 @@
       <div class="row">
         <div class="col d-flex flex-lg-row flex-column align-items-center justify-content-start">
 
-          <div class="deals">
+          <div class="deals col-md-4">
             <div class="deals_title">Deals of the Week</div>
             <div class="deals_slider_container">
 
@@ -227,7 +227,7 @@
           </div>
 
           {{-- Featured product start here --}}
-          <div class="featured">
+          <div class="featured col-md-8">
             <div class="tabbed_container">
               <div class="tabs ">
                 <ul class="clearfix">
@@ -237,8 +237,8 @@
               <hr class="pb-2">
               <div class="row">
                 @foreach ($featured as $fItem)
-                  <div class="f_product">
-                    <div class="product_item">
+                  <div class="f_product col-md-3">
+                    {{-- <div class="product_item"> --}}
 
                       <div class="product_image "><img src="{{ $fItem->product_thumbnail }}" alt></div>
                       <div class="product_content">
@@ -256,12 +256,11 @@
                       </div>
 
                       <button class="btn btn-sm btn-primary cart">Add to Cart</button>
-                      <a href="#" class="quick_view" data-toggle="modal" data-target="#exampleModal"><i
-                          class="fa fa-eye" aria-hidden="true"></i></a>
+                      <a href="#" class="quick_view" id="{{ $fItem->id }}" data-toggle="modal"
+                        data-target="#exampleModal"><i class="fa fa-eye" aria-hidden="true"></i></a>
                       <a href="{{ route('add.wishlist', $fItem->id) }}" class="product_fav"><i
                           class="fas fa-heart"></i></a>
-
-                    </div>
+                    {{-- </div> --}}
                   </div>
                 @endforeach
               </div>
@@ -305,8 +304,8 @@
             </div>
 
             <button class="btn btn-sm btn-primary cart">Add to Cart</button>
-            <a href="#" class="quick_view" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eye"
-                aria-hidden="true"></i></a>
+            <a href="#" class="quick_view" id="{{ $row->id }}" data-toggle="modal"
+              data-target="#exampleModal"><i class="fa fa-eye" aria-hidden="true"></i></a>
             <a href="{{ route('add.wishlist', $row->id) }}" class="product_fav"><i class="fas fa-heart"></i></a>
 
           </div>
@@ -2630,7 +2629,7 @@
           </div>
         </div>
 
-          {{-- Trendy single Products start here  --}}
+        {{-- Trendy single Products start here  --}}
         <div class="col-lg-9">
           <div class="trends_slider_container">
             <div class="owl-carousel owl-theme trends_slider">
@@ -2650,17 +2649,18 @@
                           @endif
                         </div>
                       </div>
-                      
+
                       <div class="trends_info clearfix">
                         <div class="trends_name"><a
                             href="{{ route('product.product_details', $row->product_slug) }}">{{ substr($row->product_name, 0, 20) }}...</a>
                         </div>
-                       
+
                       </div>
                     </div>
                     <ul class="trends_marks">
-                      <li class="trends_mark trends_new" class="" data-toggle="modal"
-                        data-target="#exampleModal"><i class="fa fa-eye" aria-hidden="true"></i></li>
+                      <li class="trends_mark trends_new quick_view" id="{{ $row->id }}" class=""
+                        data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eye"
+                          aria-hidden="true"></i></li>
                     </ul>
                     <a href="{{ route('add.wishlist', $row->id) }}" class="trends_fav"><i
                         class="fas fa-heart"></i></a>
@@ -2668,7 +2668,7 @@
                 </div>
               @endforeach
 
-  {{-- Trendy Products ends here  --}}
+              {{-- Trendy Products ends here  --}}
             </div>
           </div>
         </div>
@@ -3000,17 +3000,8 @@
 
           </button>
         </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-4">
-              <div class="image">
-                <img src="" alt="">
-              </div>
-            </div>
-            <div class="col-8">
-              <p>this is content section</p>
-            </div>
-          </div>
+        <div class="modal-body" id="quick_view">
+
         </div>
         {{-- <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -3020,8 +3011,18 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-    integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
   <script>
-  @endsection
+    $(document).on('click', '.quick_view', function() {
+      let id = $(this).attr('id');
+      // alert(id);
+      $.get("product_quick_view/" + id, function(data) {
+        $('#quick_view').html(data);
+
+        console.log(data);
+
+      })
+    })
+  </script>
+@endsection

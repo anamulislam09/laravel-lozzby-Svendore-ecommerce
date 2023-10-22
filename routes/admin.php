@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildcategoryController;
 use App\Http\Controllers\Admin\CouponController;
@@ -158,6 +159,16 @@ Route::middleware('is_admin')->group(function () {
             Route::get('/delete/{id}', [pickupController::class, 'destroy'])->name('pickup_point.delete');
         });
 
-
     });
+
+     // campaign routes
+     Route::group(['prefix' => 'campaign'], function () {
+        Route::get('/', [CampaignController::class, 'index'])->name('campaign.index');
+        Route::get('/create', [CampaignController::class, 'create'])->name('campaign.create');
+        Route::post('/store', [CampaignController::class, 'store'])->name('store.campaign');
+        // Route::get('/edit/{id}', [pickupController::class, 'edit']);
+        // Route::post('/update', [pickupController::class, 'update'])->name('update.pickup_point');
+        Route::get('/delete/{id}', [CampaignController::class, 'destroy'])->name('campaign.delete');
+    });
+    
 });

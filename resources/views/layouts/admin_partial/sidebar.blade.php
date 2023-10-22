@@ -197,6 +197,15 @@
         </li>
         {{-- Settings ends here --}}
 
+        {{-- campaign menu start here --}}
+        <li class="nav-item">
+          <a href="{{ route('campaign.index') }}" class="nav-link">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            <p>Campaign</p>
+          </a>
+        </li>
+        {{-- campaign ends here --}}
+
         {{-- orders menu start here --}}
         <li class="nav-item">
           <a href="#" class="nav-link pl-2">

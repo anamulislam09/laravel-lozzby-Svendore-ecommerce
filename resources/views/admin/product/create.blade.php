@@ -316,7 +316,7 @@
     });
   </script>
 
-  {{-- Add more inage upoad  --}}
+  {{-- Add more inmage upoad  --}}
   <script>
     $(document).ready(function() {
       var postURL = "<?php echo url('addmore'); ?>";

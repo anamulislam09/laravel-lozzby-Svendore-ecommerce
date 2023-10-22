@@ -63,10 +63,11 @@
                 <div class="product_name" style="font-size: 20px;">{{ $singleProduct->product_name }}</div>
                 <div class="product_category"><span class="text-info">Brand: </span><a href="#"
                     style="color: #838080;">{{ $singleProduct->brand->brand_name }}</a></div>
-                <div class="product_category"><span class="text-info">Stock: </span>{{ $singleProduct->stock_quantity }}
-                </div>
-                <div class="product_category"><span class="text-info">Unit: </span>{{ $singleProduct->product_unit }}
-                </div>
+                    <div class="product_category"><span>Stock: </span> @if ( $singleProduct->stock_quantity < 1)
+                      <span class="badge badge-danger"> Stock out </span> @else <span class="badge badge-primary"> Stock Available </span>
+                    @endif 
+                    </div>
+
                 <div class="rating_r rating_r_4 product_rating">
                   @if ($sum_rating == null)
                     <span class="fa fa-star"></span>
@@ -130,16 +131,6 @@
                     @endif
                   @endif
                 </div>
-                {{-- <div class="product_text"> 
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Maecenas fermentum.
-                    laoreet turpis, nec sollicitudin dolor
-                    cursus at. Maecenas aliquet, dolor a
-                    faucibus efficitur, nisi tellus cursus
-                    urna, eget dictum lacus turpis.
-                  </p>
-                </div> --}}
                 <div class="order_info d-flex flex-row">
                   <form action="#">
                     <div class="clearfix" style="z-index: 1000">
@@ -184,33 +175,7 @@
                         </div>
                       </div>
 
-                      {{-- <ul class="product_color">
-                        <li>
-                          <span>Color: </span>
-                          <div class="color_mark_container">
-                            <div id="selected_color" class="color_mark"></div>
-                          </div>
-                          <div class="color_dropdown_button">
-                            <i class="fas fa-chevron-down"></i>
-                          </div>
-                          <ul class="color_list">
-                            <li>
-                              <div class="color_mark" style="background: #999999;">
-                              </div>
-                            </li>
-                            <li>
-                              <div class="color_mark" style="background: #b19c83; ">
-                              </div>
-                            </li>
-                            <li>
-                              <div class="color_mark" style=" background: #000000; ">
-                              </div>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul> --}}
                     </div>
-                    {{-- <div class="product_price">{{ $setting->currency }}{{ $singleProduct->selling_price }}</div> --}}
                     @if ($singleProduct->descount_price == null)
                       <div class="product_price">{{ $setting->currency }}{{ $singleProduct->selling_price }}</div>
                     @else
@@ -218,22 +183,11 @@
                           style="font-size: 20px">{{ $setting->currency }}{{ $singleProduct->selling_price }}</del>{{ $setting->currency }}{{ $singleProduct->descount_price }}
                       </div>
                     @endif
-
                     <div class="button_container">
-                      {{-- <button type="button" class="button cart_button">
-                        Add to Cart
-                      </button>
-                      <div class="product_fav">
-                        <a href="" class="btn btn-outline-info" type="button">Add to Wishlist</a>
-                      </div> --}}
-
-                      {{-- <div class="input-group mb-3"> --}}
                         <div class="input-group-prepend">
                           <button class="btn btn-sm btn-primary" type="submit"> Add to Cart</button>
                           <a href="{{route('add.wishlist',$singleProduct->id)}}" class="btn btn-sm btn-warning" type="button">Add to Wishlist</a>
                         </div>
-                      
-                      {{-- </div> --}}
                     </div>
                   </form>
                 </div>
@@ -242,7 +196,6 @@
             <div class="col-6 pl-4">
               <p>Pickup point of this product</p>
               <strong>{{ $singleProduct->pickuppoint->pickup_point_name }}</strong>
-
               <br>
               <hr><br>
               @isset($singleProduct->product_video)
@@ -253,11 +206,7 @@
               @endisset
             </div>
           </div>
-
         </div>
-
-
-
       </div>
 
       <div class="card mt-5">
@@ -275,7 +224,6 @@
         <div class="card-header">
           <div class="product_name pl-3" style="font-size: 20px;">Rating & Reviews of
             {{ $singleProduct->product_name }}.
-
           </div>
         </div>
         <div class="card-body row">
@@ -348,7 +296,6 @@
           <div class="col-3">
             <p>Total review of this product</p>
             {{-- All review   --}}
-
             <div class="rating_r rating_r_4 product_rating">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
@@ -389,8 +336,6 @@
               <span class="fa fa-star"></span>
               <span class="pl-2">total {{ $rating1 }}</span>
             </div>
-
-
           </div>
           <div class="col-6">
             <form action="{{ route('store.review') }}" method="POST">
@@ -419,7 +364,6 @@
               @endif
             </form>
           </div>
-
         </div>
         <br><br>
         {{-- All reviews of this product --}}

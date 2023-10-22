@@ -2141,8 +2141,13 @@ span.fa.fa-star.checked {
 a.quick_view {
     padding: 5px;
     margin-top: -20px !important;
-    background: #f7901a;
+    background: #066af6;
     border-radius: 10px;
+	transition: .3s;
+}
+
+.quick_view{
+	background: #066af6;
 	transition: .3s;
 }
 
@@ -2150,6 +2155,64 @@ a.quick_view i {
 	color: white;
 }
 
-a.quick_view:hover{
-	background-color: #066af6;
+.quick_view:hover{
+	background-color: hwb(2 3% 3%);
+}
+
+/* edit quick model view   */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	.modal-dialog{
+		max-width: 520px;
+    margin: 30px auto;
+		
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.modal-dialog{
+		max-width: 550px;
+    margin: 30px auto;
+		
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.modal-dialog{
+		max-width: 650px;
+    margin: 30px auto;
+		
+	}
+}
+
+
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.modal-dialog{
+		max-width: 750px;
+    margin: 30px auto;
+		
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	.modal-dialog{
+		max-width: 750px;
+    margin: 30px auto;
+		
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	.modal-dialog{
+		max-width: 800px;
+    margin: 30px auto;
+		
+	}
 }
