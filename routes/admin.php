@@ -166,8 +166,8 @@ Route::middleware('is_admin')->group(function () {
         Route::get('/', [CampaignController::class, 'index'])->name('campaign.index');
         Route::get('/create', [CampaignController::class, 'create'])->name('campaign.create');
         Route::post('/store', [CampaignController::class, 'store'])->name('store.campaign');
-        // Route::get('/edit/{id}', [pickupController::class, 'edit']);
-        // Route::post('/update', [pickupController::class, 'update'])->name('update.pickup_point');
+        Route::get('/edit/{id}', [CampaignController::class, 'edit']);
+        Route::post('/update', [CampaignController::class, 'update'])->name('update.campaign');
         Route::get('/delete/{id}', [CampaignController::class, 'destroy'])->name('campaign.delete');
     });
     

@@ -11,7 +11,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Home</a></li>
               <li class="breadcrumb-item active">Campaign List</li>
             </ol>
           </div>
@@ -46,38 +46,22 @@
 
   {{-- childcategory edit model --}}
   <!-- Modal -->
-  {{-- <div class="modal fade" id="editbrandModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="editcampaignModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Brand </h5>
+          <h5 class="modal-title" id="exampleModalLabel">Edit Campaign </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="card-body">
-          <form action="{{ route('campaign.brand') }}" method="POST">
-            @csrf
-            <input type="hidden" name="id" id="e_brand_id">
-            <div class="mb-3 mt-3">
-              <label for="brand_name" class="form-label">Brand Name:</label>
-              <input type="text" class="form-control" value="{{ old('title') }}" name="brand_name" id="e_brand_name">
-            </div>
-            @error('brand_name')
-              <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        </form>
+        <div class="modal-body">
+         
 
       </div>
     </div>
-  </div> --}}
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -121,7 +105,7 @@
             searchable: true
           },
 
-            // show image using yajra datatable
+          // show image using yajra datatable
           {
             "name": "image",
             "data": "image",
@@ -131,6 +115,12 @@
             "title": "Image",
             "orderable": true,
             "searchable": true
+          },
+          {
+            data: "status",
+            title: "status",
+            orderable: false,
+            searchable: false
           },
           {
             data: "action",
@@ -144,15 +134,22 @@
   </script>
 
 
-  {{-- update childcategory using ajax --}}
+  {{-- update Campaign using ajax --}}
   <script>
     $('body').on('click', '#edit', function() {
-      let brand_id = $(this).data('id');
+      let campaign_id = $(this).data('id');
 
       // console.log(childcat_id);
-      $.get("/brand/edit/" + brand_id, function(data) {
-        $('#e_brand_name').val(data.brand_name);
-        $('#e_brand_id').val(data.id);
+      $.get("/campaign/edit/" + campaign_id, function(data) {
+
+        $('.modal-body').html(data);
+        // $('#e_title').val(data.title);
+        // $('#e_start_date').val(data.start_date);
+        // $('#e_end_date').val(data.end_date);
+        // $('#e_discount').val(data.discount);
+        // $('#e_status').val(data.status);
+        // $('#e_image').val(data.image);
+        // $('#e_campaign_id').val(data.id);
 
       })
     })
