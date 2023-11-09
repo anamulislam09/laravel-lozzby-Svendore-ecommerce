@@ -114,12 +114,6 @@ if ($request->image) {
     $data['image'] = $img_url;
     
 } else {
-    // Image upload start here
-    // $slug = Str::slug($request->title, '-');
-    // $image = $request->image;
-    // $img_name = $slug . '.' . $image->getClientOriginalExtension();
-    // $image->move(public_path('files/campaign'), $img_name);
-    // $img_url = 'files/campaign/' . $img_name;
     $data['image'] = $request->old_image;
 }
     // dd($data);

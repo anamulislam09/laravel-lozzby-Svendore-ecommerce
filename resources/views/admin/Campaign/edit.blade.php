@@ -58,6 +58,7 @@
       <label for="image" class="form-label"> Campaign Image:</label>
       <input type="file" class="dropify" data-height="200" name="image">
       <input type="hidden" name="old_image" value="{{$data->image}}">
+      <img src="{{$data->image}}" alt="" style="width: 80px">
 
     </div>
     @error($data->image)

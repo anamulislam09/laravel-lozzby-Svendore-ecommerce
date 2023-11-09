@@ -3733,5 +3733,17 @@ del.pr_discount {
     margin-right: 5px;
 }
 
+.right_btn{
+	float: right;
+	margin-right: 10px;
+	/* text-align: end; */
+}
 
+.right_btn li a {
+	color: #333;
+	font-size: 12px;
+}
 
+.right_btn li a:hover {
+	color: #fb5200;
+}

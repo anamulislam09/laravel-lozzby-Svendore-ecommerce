@@ -105,8 +105,7 @@
           <div class="row">
             <div class="col d-flex flex-row">
               <div class="top_bar_contact_item">
-                <div class="top_bar_icon"><img src="{{ asset('frontend/images/phone.png') }}" alt></div>+38 068 005
-                3570
+                <div class="top_bar_icon"><a href="tel:01847309892"><img src="{{ asset('frontend/images/phone.png') }}" class="pr-2" alt>01847309892</a></div>
               </div>
               <div class="top_bar_contact_item">
                 <div class="top_bar_icon"><img src="{{ asset('frontend/images/mail.png') }}" alt></div><a
@@ -221,11 +220,11 @@
                   <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                     <div class="cart_icon">
                       <img src="{{ asset('frontend/images/cart.png') }}" alt>
-                      <div class="cart_count"><span>10</span></div>
+                      <div class="cart_count"><span>{{Cart::count()}}</span></div>
                     </div>
                     <div class="cart_content">
-                      <div class="cart_text"><a href="#">Cart</a></div>
-                      <div class="cart_price">$85</div>
+                      <div class="cart_text"><a href="{{route('removeCart')}}">Cart</a></div>
+                      <div class="cart_price">{{ $setting->currency }}{{Cart::total()}}</div>
                     </div>
                   </div>
                 </div>

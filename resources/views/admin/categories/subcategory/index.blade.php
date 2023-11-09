@@ -38,6 +38,8 @@
                     <th>SubCategory Name</th>
                     <th>SubCategory Slug</th>
                     <th>Category Name</th>
+                    <th>Home page</th>
+                    <th>SubCategory Image</th>
                     <th> Action</th>
                   </tr>
                   </thead>
@@ -48,6 +50,15 @@
                     <td>{{$subcat->subcategory_name}}</td>
                     <td>{{$subcat->subcategory_slug}}</td>
                     <td>{{$subcat->category_name}}</td>
+                    <td>
+                      @if ($subcat->home_page==1)
+                      <p class="badge badge-success">active</p>
+                      @else
+                      <p class="badge badge-danger">deactive</p>
+                    @endif
+                  </td>
+
+                    <td><img src="{{$subcat->image}}" alt="{{$subcat->subcategory_name}}" style="width:70px"></td>
                     <td>
                         <a href="" class="btn btn-sm btn-info edit" data-id="{{$subcat->id}}" data-toggle="modal" data-target="#editsubCatModel"><i class="fas fa-edit"></i></a>
                         <a href="{{ route('subcategory.delete', $subcat->id) }}"  class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>

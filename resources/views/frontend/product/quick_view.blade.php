@@ -111,8 +111,18 @@
               @endif
             @endif
           </div>
+          {{-- cart details --}}
           <div class="order_info d-flex flex-row">
-            <form action="#">
+            <form action="{{route('addToCartQv')}}" method="POST" id="add_cart_form_Qv">
+              @csrf
+              <input type="hidden" name="id" value="{{$product->id}}">
+
+              @if ($product->descount_price == null)
+              <input type="hidden" name="price" value="{{ $product->selling_price }}">
+            @else
+              <input type="hidden" name="price" value="{{ $product->descount_price }}">
+            @endif
+
               <div class="clearfix" style="z-index: 1000">
                 <div class="form-group">
                   <div class="row">
@@ -144,7 +154,7 @@
                 </div>
                 <div class="product_quantity clearfix">
                   <span>Quantity: </span>
-                  <input id="quantity_input" type="text" pattern="[1-9]*" value="1" />
+                  <input id="quantity_input" type="text" name="qty" pattern="[1-9]*" value="1" />
                   <div class="quantity_buttons">
                     <div id="quantity_inc_button" class="quantity_inc quantity_control">
                       <i class="fas fa-chevron-up"></i>
@@ -166,16 +176,38 @@
               @endif
               <div class="button_container">
                   <div class="input-group-prepend">
-                    <button class="btn btn-sm btn-primary" type="submit"> Add to Cart</button>
+                   @if ($product->stock_quantity<1)
+                   <button class="btn btn-sm btn-danger" disabled>Stock out</button>
+                     @else
+                     <button class="btn btn-sm btn-primary" type="submit">Add to Cart  <span class="loading d-none">...</span></button>
+                   @endif
                     <a href="{{route('add.wishlist',$product->id)}}" class="btn btn-sm btn-warning" type="button">Add to Wishlist</a>
                   </div>
               </div>
             </form>
           </div>
-
-
-          
         </div>
-
     </div>
   </div>
+
+  <script>
+    // add to cart 
+    $('#add_cart_form_Qv').submit(function(e) {
+      e.preventDefault();
+      $('.loading').removeClass('d-none');
+      var url = $(this).attr('action');
+      var request = $(this).serialize();
+      $.ajax({
+        url: url,
+        type:'post',
+        async: false,
+        data: request,
+        success:function(data){
+          toastr.success(data);
+          $('#add_cart_form')[0].reset();
+          $('.loading').addClass('d-none');
+          cart();
+        }
+      })
+    })
+  </script>
