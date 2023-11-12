@@ -133,7 +133,7 @@
                           id="">
                           <option value="" selected disabled>Select Size</option>
                           @foreach ($size as $row)
-                            <option value="">{{ $row }}</option>
+                            <option value="{{ $row }}">{{ $row }}</option>
                           @endforeach
                         </select>
                       </div>

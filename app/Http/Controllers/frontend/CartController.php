@@ -53,7 +53,7 @@ class CartController extends Controller
             'qty' => $request->qty,
             'price' => $request->price,
             'weight' => '1',
-            'options' => ['size' => $request->price, 'color' => $request->color, 'thumbnail' => $product->product_thumbnail],
+            'options' => ['size' => $request->size, 'color' => $request->color, 'thumbnail' => $product->product_thumbnail],
         ]);
         return response()->json('Add to cart Successfully!');
         //  } else {
@@ -70,7 +70,7 @@ class CartController extends Controller
             'qty' => '1',
             'price' => $request->price,
             'weight' => '1',
-            'options' => ['size' => $request->price, 'color' => $request->color, 'thumbnail' => $product->product_thumbnail],
+            'options' => ['size' => $request->size, 'color' => $request->color, 'thumbnail' => $product->product_thumbnail],
         ]);
         return response()->json('Add to cart Successfully!');
         //  } else {
@@ -81,7 +81,7 @@ class CartController extends Controller
 
     public function myCart(){
         $products = Cart::content();
-        return response()->json($products);
+        return view('frontend.cart.cart', compact('products'));
     }
 
     public function removeCart(){

@@ -24,7 +24,11 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/responsive.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/product_styles.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/product_responsive.css') }}">
- 
+
+  {{-- cart css  --}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/cart_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/cart_responsive.css') }}">
+
     <!-- toaste -->
     <link rel="stylesheet" href="{{asset('backend/plugins/toastr/toastr.css')}}">
 
@@ -223,7 +227,7 @@
                       <div class="cart_count"><span>{{Cart::count()}}</span></div>
                     </div>
                     <div class="cart_content">
-                      <div class="cart_text"><a href="{{route('removeCart')}}">Cart</a></div>
+                      <div class="cart_text"><a href="{{route('cart')}}">Cart</a></div>
                       <div class="cart_price">{{ $setting->currency }}{{Cart::total()}}</div>
                     </div>
                   </div>
@@ -396,6 +400,9 @@
   <script src="{{ asset('frontend/plugins/easing/easing.js') }}"></script>
   <script src="{{ asset('frontend/js/custom.js') }}"></script>
   <script src="{{ asset('frontend/js/product_custom.js') }}"></script>
+
+  {{-- cart js  --}}
+  <script src="{{ asset('frontend/js/cart_custom.js') }}"></script>
    <!-- toaste -->
 <script src="{{asset('backend/plugins/toastr/toastr.min.js')}}"></script>
 
