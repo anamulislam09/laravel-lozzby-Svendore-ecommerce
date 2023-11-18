@@ -1642,3 +1642,10 @@ select option
 {
 	margin-right: 0px;
 }
+
+
+/* custome css start here */
+
+.custome-select{
+	border-bottom: none;
+}

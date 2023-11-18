@@ -41,7 +41,7 @@ Route::group([], function () {
     Route::post('addToCartQv', [CartController::class, 'addToCartQv'])->name('addToCartQv');
     Route::post('addToCart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::get('my-cart', [CartController::class, 'myCart'])->name('cart');  //show all cart 
-    Route::get('remove-cart', [CartController::class, 'removeCart'])->name('removeCart');  //removed all cart 
+    Route::get('remove-cart/{id}', [CartController::class, 'removeCart'])->name('removeCart');  //removed all cart 
 
     // show product under category wise 
     Route::get('category/{id}', [ProductController::class, 'catProduct'])->name('category.products');

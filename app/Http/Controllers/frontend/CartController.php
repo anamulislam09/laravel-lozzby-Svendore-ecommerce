@@ -45,6 +45,7 @@ class CartController extends Controller
 
     public function addToCartQv(Request $request)
     {
+        // dd($request->qty);
         // if (Auth::check()) {
         $product = Product::find($request->id);
         Cart::add([
@@ -84,8 +85,11 @@ class CartController extends Controller
         return view('frontend.cart.cart', compact('products'));
     }
 
-    public function removeCart(){
-        Cart::destroy();
-        return response()->json('Cart removed Successfully!');
+    public function removeCart($id){
+        $product = Cart::where('id',$id)->first()->destroy();
+        // $Subcategory = Subcategory::where('id', $id)->first();
+        // Cart::destroy($product);
+        $notification = array('message'=>'Cart removed Successfully!','alert_type'=>'danger');
+        return redirect()->back()->with($notification);
     }
 }

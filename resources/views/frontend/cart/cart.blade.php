@@ -23,15 +23,30 @@
                     </div>
                     <div class="cart_item_color cart_info_col">
                       <div class="cart_item_title">Color</div>
-                      <div class="cart_item_text"><span style="background-color:#999999;"></span>{{$product->color}}</div>
+                      <div class="cart_item_text">
+                        {{-- <span style="background-color:#999999;"></span> --}}
+                      <select class="custome-select form-control-sm" name="size" style="min-width: 45px" id="">
+                        <option value="{{$product->color}}">{{$product->color}}</option>
+                        <option value="{{$product->color}}">{{$product->color}}</option>
+                      </select>
+                    </div>
                     </div>
                     <div class="cart_item_quantity cart_info_col">
                       <div class="cart_item_title">Quantity</div>
-                      <div class="cart_item_text">{{$product->qty}}</div>
+
+                      <div class="cart_item_text">
+                        {{-- {{$product->qty}} --}}
+                        <input type="number" name="qty" class="form-control-sm" style="width:50px; border:none" value="{{$product->qty}}" min="1" required id="">
+                      </div>
                     </div>
                     <div class="cart_item_quantity cart_info_col">
                       <div class="cart_item_title">Size</div>
-                      <div class="cart_item_text">{{$product->size}}</div>
+                      <div class="cart_item_text">
+                        <select class="custome-select form-control-sm" name="size" style="min-width: 45px" id="">
+                        <option value="{{$product->size}}">{{$product->size}}</option>
+                        <option value="{{$product->size}}">{{$product->size}}</option>
+                      </select>
+                        </div>
                     </div>
                     <div class="cart_item_price cart_info_col">
                       <div class="cart_item_title">Price</div>
@@ -43,7 +58,7 @@
                     </div>
                     <div class="cart_item_total cart_info_col">
                       <div class="cart_item_title">Action</div>
-                      <div class="cart_item_text"><a href="#" class="text-danger fw-bold">X</a></div>
+                      <div class="cart_item_text"><a href="{{route('removeCart',$product->id)}}" class="text-danger fw-bold">X</a></div>
                     </div>
                   </div>
                 </li>
@@ -60,8 +75,8 @@
               </div>
             </div>
             <div class="cart_buttons">
-              <button type="button" class="button cart_button_clear">Add to Cart</button>
-              <button type="button" class="button cart_button_checkout">Add to Cart</button>
+              <button type="button" class="button bg-danger text-white cart_button_clear">Empty cart</button>
+              <button type="button" class="button cart_button_checkout">Proceed to check out</button>
             </div>
           </div>
         </div>

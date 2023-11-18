@@ -143,9 +143,9 @@
                         <label for="">Color:</label>
                         <select name="color" class="form-control form-control-sm" style="min-width:120px;"
                           id="">
-                          <option value="" selected disabled>Select color</option>
+                          <option selected disabled>Select color</option>
                           @foreach ($color as $row)
-                            <option value="">{{ $row }}</option>
+                            <option value="{{ $row}}">{{ $row }}</option>
                           @endforeach
                         </select>
                       </div>
@@ -206,7 +206,8 @@
           toastr.success(data);
           $('#add_cart_form')[0].reset();
           $('.loading').addClass('d-none');
-          cart();
+          Cart();
+          
         }
       })
     })
